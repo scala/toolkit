@@ -20,8 +20,6 @@ def main(operation: String, owner: String, repoName: String) =
         case "commits" => repo.getCommits()
                               .foreach(commit => println(s"$commit.author,$commit.date"))
         case "lines" => repo.lineCountPerLanguage()
-                            .toSeq
-                            .sortWith(_._2 > _._2)
                             .foreach((lang, lines) => println(s"$lang,$lines"))
         case "issues" => repo.getOpenIssuesWithoutAnswers()
                              .foreach(println)

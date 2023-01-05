@@ -7,11 +7,11 @@ case class Commit(author: String, sha: String, date: String)
 object Commit:
     def commitsFromJson(json: String): List[Commit] =
         for commit <- ujson.read(json).arr.toList
+            author = Try(commit("author")("login").str)
+                .orElse(Try(commit("commit")("author")("name").str))
+                .getOrElse("Unknown")
+            sha = commit("sha").str
+            date = Try(commit("commit")("author")("date").str).getOrElse("")
         yield
-            val author = Try(commit("author")("login").str)
-                        .orElse(Try(commit("commit")("author")("name").str))
-                        .getOrElse("Unknown")
-            val sha = commit("sha").str
-            val date = Try(commit("commit")("author")("date").str).getOrElse("")
-                Commit(author, sha, date)
+            Commit(author, sha, date)
             
