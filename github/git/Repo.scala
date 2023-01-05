@@ -11,6 +11,7 @@ import scala.util.Success
 
 import git.Lang.*
 import git.Commit
+import git.Contributor
 
 class Repo(val owner: String, val repoName: String):
     lazy val localRepo = cloneRepo()
@@ -29,11 +30,12 @@ class Repo(val owner: String, val repoName: String):
         val commits = Commit.commitsFromJson(json)
         if (isLast(response)) commits else commits ++= getCommits(page + 1)
 
-    def getContributors(): Map[String, Int] = 
+    def getContributors(): List[Contributor] = 
         getCommits()
             .groupBy(_.author)
             .mapValues(seq => seq.length)
-            .toMap
+            .map((author, commits) => Contributor(author, commits))
+            .toList
     
     def getOpenIssuesWithoutAnswers(page: Int = 1): ArrayBuffer[Uri] = 
         val request = basicRequest

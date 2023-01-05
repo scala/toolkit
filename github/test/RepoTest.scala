@@ -24,8 +24,8 @@ class RepoTest extends munit.FunSuite:
         // when
         val contributorsObtained = repo.getContributors()
         // then
-        val contributorsExpected = Map(
-            "octocat" -> 3
+        val contributorsExpected = List(
+            Contributor("octocat", 3)
         )
         assertEquals(contributorsObtained, contributorsExpected)
     }

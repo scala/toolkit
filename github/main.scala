@@ -7,6 +7,7 @@ import sttp.client3._
 import sys.error
 import git.Repo
 import git.Commit
+import git.Contributor
 import java.nio.file.Path
 
 @main
@@ -14,9 +15,8 @@ def main(operation: String, owner: String, repoName: String) =
     val repo = Repo(owner, repoName)
     operation match
         case "contributors" => repo.getContributors()
-                                   .toSeq
-                                   .sortWith(_._2 > _._2)
-                                   .foreach((author, count) => println(s"$author,$count"))
+                                   .sortWith(_.commits > _.commits)
+                                   .foreach(c => println(s"$c.author,$c.count"))
         case "commits" => repo.getCommits()
                               .foreach(commit => println(s"$commit.author,$commit.date"))
         case "lines" => repo.lineCountPerLanguage()
