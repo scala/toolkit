@@ -5,7 +5,6 @@ import sttp.client3._
 import sttp.model._
 import os.Path
 
-import scala.collection.mutable.ArrayBuffer
 import scala.util.Try
 import scala.util.Success
 
@@ -17,7 +16,7 @@ class Repo(val owner: String, val repoName: String):
     lazy val localRepo = cloneRepo()
     val client = SimpleHttpClient()
     
-    def getCommits(page: Int = 1): ArrayBuffer[Commit] = 
+    def getCommits(page: Int = 1): List[Commit] = 
         val request = basicRequest
             .header("Accept", "application/vnd.github+json")
             .get(uri"https://api.github.com/repos/$owner/$repoName/commits?per_page=100&page=$page")
@@ -28,7 +27,7 @@ class Repo(val owner: String, val repoName: String):
             case Left(value) => error(value)
 
         val commits = Commit.commitsFromJson(json)
-        if (isLast(response)) commits else commits ++= getCommits(page + 1)
+        if (isLast(response)) commits else commits ++ getCommits(page + 1)
 
     def getContributors(): List[Contributor] = 
         getCommits()
@@ -37,7 +36,7 @@ class Repo(val owner: String, val repoName: String):
             .map((author, commits) => Contributor(author, commits))
             .toList
     
-    def getOpenIssuesWithoutAnswers(page: Int = 1): ArrayBuffer[Uri] = 
+    def getOpenIssuesWithoutAnswers(page: Int = 1): List[Uri] = 
         val request = basicRequest
             .header("Accept", "application/vnd.github+json")
             .get(uri"https://api.github.com/repos/$owner/$repoName/issues?per_page=100&page=$page")
@@ -47,13 +46,14 @@ class Repo(val owner: String, val repoName: String):
             case Right(content) => content
             case Left(value) => error(value)
 
-        val issues = for issue <- ujson.read(json).arr
-        if issue("state").str == "open"
-        if Try(issue("pull_request")).isFailure
-        if hasNoComments(issue("comments_url").str)
-        yield uri"${issue("html_url").str}"
+        val issues = 
+            for issue <- ujson.read(json).arr.toList
+                if issue("state").str == "open" 
+                if Try(issue("pull_request")).isFailure
+                if hasNoComments(issue("comments_url").str)
+            yield uri"${issue("html_url").str}"
 
-        if (isLast(response)) issues else issues ++= getOpenIssuesWithoutAnswers(page + 1)
+        if (isLast(response)) issues else issues ++ getOpenIssuesWithoutAnswers(page + 1)
 
     def lineCountPerLanguage(): Map[Lang, Int] = 
         os.walk(localRepo, skip = _.last.equals(".git"))
