@@ -1,0 +1,30 @@
+name: Publish toolkit
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    - name: Check out code
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: coursier/cache-action@v6.3
+    - name: Setup Scala CLI
+      uses: VirtusLab/scala-cli-setup@v0.1
+
+    - name: Setup credentials for sonatype
+      run: scala-cli config publish.credentials s01.oss.sonatype.org env:OSSRH_USERNAME env:OSSRH_PASSWORD
+      env: 
+        OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+
+    - name: Publish Toolkit for JVM
+      run: scala-cli publish Toolkit.scala publish-conf.scala
+
+    - name: Publish Toolkit for Scala Native
+      run: scala-cli publish --native Toolkit.scala publish-conf.scala
+
+    - name: Publish Toolkit for Scala.js
+      run: scala-cli publish --js Toolkit.js.scala publish-conf.scala
