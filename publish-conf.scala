@@ -6,5 +6,3 @@
 //> using publish.license "Apache-2.0"
 //> using publish.repository "central"
 //> using publish.developer "szymon-rd|Simon R|https://github.com/szymon-rd"
-//> using publish.secretKey "env:PUBLISH_SECRET_KEY"
-

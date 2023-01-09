@@ -2,3 +2,5 @@
 .scala-build/
 .vscode/
 .bsp/
+*.asc
+*SECRET
