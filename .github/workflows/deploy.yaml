@@ -20,19 +20,25 @@ jobs:
         uses: VirtusLab/scala-cli-setup@main
 
       - name: Publish Toolkit for JVM
-        run: scala-cli publish -v -v -v Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME
+        run: scala-cli publish -v -v -v Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --secret-key env:PGP_SECRET --secret-key-password env:PGP_PASSWORD
         env: 
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          PGP_PASSWORD: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
 
       - name: Publish Toolkit for Scala Native
-        run: scala-cli publish --native Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME
+        run: scala-cli publish --native Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --secret-key env:PGP_SECRET --secret-key-password env:PGP_PASSWORD
         env: 
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-
+          PGP_PASSWORD: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
+          
       - name: Publish Toolkit for Scala.js
-        run: scala-cli publish --js Toolkit.js.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME
+        run: scala-cli publish --js Toolkit.js.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --secret-key env:PGP_SECRET --secret-key-password env:PGP_PASSWORD
         env: 
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          PGP_PASSWORD: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
