@@ -17,10 +17,10 @@ jobs:
       - uses: coursier/cache-action@v6.3
 
       - name: Setup Scala CLI
-        uses: VirtusLab/scala-cli-setup@v0.1
+        uses: VirtusLab/scala-cli-setup@main
 
       - name: Publish Toolkit for JVM
-        run: scala-cli publish Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME
+        run: scala-cli publish -v -v -v Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME
         env: 
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
