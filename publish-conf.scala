@@ -1,5 +1,5 @@
 //> using publish.organization "org.virtuslab"
-//> using publish.name "toolkit-alpha"
+//> using publish.name "toolkit"
 //> using publish.computeVersion "git:tag"
 //> using publish.url "https://github.com/VirtusLab/toolkit"
 //> using publish.versionControl "scm:git:github.com/VirtusLab/toolkit.git"
