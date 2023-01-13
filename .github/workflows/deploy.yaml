@@ -28,6 +28,7 @@ jobs:
 
       - name: Publish Toolkit for JVM
         run: scala-cli publish --cross Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD
+        continue-on-error: true
         env: 
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -36,6 +37,7 @@ jobs:
 
       - name: Publish Toolkit for native
         run: scala-cli publish --cross --native Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD
+        continue-on-error: true
         env: 
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -44,6 +46,7 @@ jobs:
 
       - name: Publish Toolkit for JS
         run: scala-cli publish --cross --js Toolkit.js.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD
+        continue-on-error: true
         env: 
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
