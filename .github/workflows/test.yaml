@@ -1,0 +1,36 @@
+name: Test examples
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Test examples
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: coursier/cache-action@v6.3
+
+      - name: Setup Scala CLI
+        uses: VirtusLab/scala-cli-setup@main
+
+      - name: Run test examples
+        run: |
+          cd examples
+          for file in *.sc
+          do
+            scala-cli "$file"
+          done
+
+      - name: Run examples of tests
+        run: |
+          cd examples
+          for file in *.test.scala
+          do
+            scala-cli test "$file"
+          done
