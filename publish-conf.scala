@@ -1,5 +1,4 @@
 //> using publish.organization "org.scala-lang"
-//> using publish.name "toolkit"
 //> using publish.computeVersion "git:tag"
 //> using publish.url "https://github.com/scala/toolkit"
 //> using publish.versionControl "scm:git:github.com/scala/toolkit.git"
