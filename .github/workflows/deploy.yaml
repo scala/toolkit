@@ -52,3 +52,30 @@ jobs:
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           PGP_PASSWORD: ${{ secrets.PGP_PASSPHRASE }}
           PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
+
+      - name: Publish Toolkit Test for JVM
+        run: for i in {1..5}; do scala-cli --power publish --cross ToolkitTest.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        continue-on-error: true
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          PGP_PASSWORD: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
+    
+      - name: Publish Toolkit Test for native
+        run: for i in {1..5}; do scala-cli --power publish --cross --native ToolkitTest.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        continue-on-error: true
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          PGP_PASSWORD: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
+
+      - name: Publish Toolkit Test for JS
+        run: for i in {1..5}; do scala-cli --power publish --cross --js ToolkitTest.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        continue-on-error: true
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          PGP_PASSWORD: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
