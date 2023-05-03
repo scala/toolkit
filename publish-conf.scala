@@ -1,7 +1,7 @@
 //> using publish.organization "org.scala-lang"
 //> using publish.computeVersion "git:tag"
 //> using publish.url "https://github.com/scala/toolkit"
-//> using publish.versionControl "scm:git:github.com/scala/toolkit.git"
+//> using publish.vcs "github:scala/toolkit"
 //> using publish.license "Apache-2.0"
 //> using publish.repository "central"
 //> using publish.developer "szymon-rd|Simon R|https://github.com/szymon-rd"
