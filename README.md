@@ -7,4 +7,4 @@ The Scala Toolkit is currently in pre-release stage. However, you can already us
 ```scala
 //> using toolkit "latest"
 ```
-Or by including the latest Toolkit artifact in your build file: `org.scala-lang::toolkit:0.1.6`
+Or by including the latest Toolkit artifact in your build file: `org.scala-lang::toolkit:0.1.7`
