@@ -21,16 +21,16 @@ jobs:
         uses: VirtusLab/scala-cli-setup@main
 
       - name: Run test examples
+        working-directory: examples
         run: |
-          cd examples
           for file in *.sc
           do
             scala-cli "$file"
           done
 
       - name: Run examples of tests
+        working-directory: examples
         run: |
-          cd examples
           for file in *.test.scala
           do
             scala-cli test "$file"

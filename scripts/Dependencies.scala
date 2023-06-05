@@ -12,7 +12,7 @@ object Dependencies:
     def getDiff(that: Version): VersionDiff = Version.compareVersions(this, that)
 
   object Version:
-      /**
+    /**
      * Compares two versions and returns the type of update that is required to go from oldVersion to newVersion.
      * Takes into account that versions may be rolled back. For example:
      *   - 1.0.1 -> 1.0.0 is a patch update

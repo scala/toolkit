@@ -33,6 +33,8 @@ def saveTree(crossVersion: String): Unit =
     
     val head = DependencyTree(resolution).head
     val depTree = makeDepTree(head)
-    val snapshot = DepsSnapshot(depTree.id, version, depTree.deps)
+    val snapshot = Dep(depTree.id, version, depTree.deps)
+
+    println(snapshot)
 
     os.write.over(file, write(snapshot, 2), createFolders = true)
