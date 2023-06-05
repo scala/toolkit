@@ -4,4 +4,3 @@
 .bsp/
 *.asc
 *SECRET
-scripts/expected/
