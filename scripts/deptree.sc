@@ -1,6 +1,6 @@
 #!/usr/bin/env -S scala-cli shebang
-//> using toolkit 0.1.7
 //> using scala 3.3
+//> using toolkit 0.1.7
 //> using dep io.get-coursier:coursier_2.13:2.1.4
 //> using file Dependencies.scala
 //> using file Config.scala

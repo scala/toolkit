@@ -5,9 +5,9 @@ import coursier.graph.DependencyTree
 import Dependencies.*
 
 object Dependencies:
-  case class Version(major: Int, minor: Int, patch: Int, suffix: Option[String]) extends Ordered[Version] derives ReadWriter:
+  case class Version(major: Int, minor: Int, patch: Int, suffix: Option[String] = None) extends Ordered[Version] derives ReadWriter:
     def compare(that: Version): Int =
-    Ordering[(Int, Int, Int, Option[String])].compare((this.major, this.minor, this.patch, this.suffix), (that.major, that.minor, that.patch, that.suffix))
+      Ordering[(Int, Int, Int, Option[String])].compare((this.major, this.minor, this.patch, this.suffix), (that.major, that.minor, that.patch, that.suffix))
     override def toString: String = s"$major.$minor.$patch"
     def getDiff(that: Version): VersionDiff = Version.compareVersions(this, that)
 
@@ -28,7 +28,7 @@ object Dependencies:
         if oldVersion.minor < newVersion.minor then MinorUpdate
         else MajorUpdate
       else if oldVersion.patch != newVersion.patch then PatchUpdate
-      else if oldVersion.suffix != newVersion.suffix then
+      else if oldVersion.suffix != newVersion.suffix then 
         oldVersion match
           case Version(_, 0, 0, _) => MajorUpdate
           case Version(_, _, 0, _) => MinorUpdate
@@ -58,7 +58,7 @@ object Dependencies:
     val depId = s"${dep.module.organization.value}:${dep.module.name.value}"
     val versionParsed = VersionString.unapply(dep.version)
     versionParsed match
-      case Some(version) => Dep(dep.module.name.value, version, tree.children.map(makeDepTree).toList)
+      case Some(version) => Dep(dep.module.toString(), version, tree.children.map(makeDepTree).toList)
       case None => throw new Exception(s"Could not parse version from $depId:${dep.version}")
     
 
