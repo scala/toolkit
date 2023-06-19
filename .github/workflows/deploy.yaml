@@ -37,7 +37,7 @@ jobs:
           gpg_private_key: ${{ secrets.PGP_SECRET }}
           passphrase: ${{ secrets.PGP_PASSPHRASE }}
           
-     - name: Publish Toolkit for JVM
+      - name: Publish Toolkit for JVM
         run: for i in {1..5}; do scala-cli --power publish --cross Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
         continue-on-error: true
         env:
