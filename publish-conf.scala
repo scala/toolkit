@@ -6,7 +6,3 @@
 //> using publish.repository "central"
 //> using publish.developer "szymon-rd|Simon R|https://github.com/szymon-rd"
 //> using publish.developer "adpi2|Adrien Piquerez|https://github.com/adpi2"
-//> using publish.ci.user "env:OSSRH_USERNAME"
-//> using publish.ci.password "env:OSSRH_PASSWORD"
-//> using publish.ci.secretKey "env:GPG_PRIVATE_KEY"
-//> using publish.ci.secretKeyPassword "env:PGP_PASSWORD"
