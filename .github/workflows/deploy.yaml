@@ -34,7 +34,7 @@ jobs:
           gpg --import --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.PGP_PASSPHRASE }}" private.key
           echo "fingerprint=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr:/ { print $10 }')" >> $GITHUB_ENV
           rm private.key
-        with:
+        env:
           gpg_private_key: ${{ secrets.PGP_SECRET }}
           passphrase: ${{ secrets.PGP_PASSPHRASE }}
 
