@@ -7,6 +7,7 @@ on:
 env:
   OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
   OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+  GPG_PRIVATE_KEY: ${{ secrets.PGP_SECRET }}
   PGP_PASSWORD: ${{ secrets.PGP_PASSPHRASE }}
 
 jobs:
@@ -24,48 +25,39 @@ jobs:
       - name: Setup Scala CLI
         uses: VirtusLab/scala-cli-setup@main
 
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ secrets.PGP_SECRET }}
-          passphrase: ${{ secrets.PGP_PASSPHRASE }}
+      - name: Publish Toolkit locally for JVM
+        run: scala-cli --power publish local --cross Toolkit.scala publish-conf.scala 
+      
+      - name: Publish Toolkit locally for native
+        run: scala-cli --power publish local --cross --native Toolkit.scala publish-conf.scala 
+
+      - name: Publish Toolkit locally for JS
+        run: scala-cli --power publish local --cross --js Toolkit.scala publish-conf.scala 
 
       - name: Publish Toolkit for JVM
-        run: for i in {1..5}; do scala-cli --power publish --cross Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
-        continue-on-error: true
-        env:
-          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
+        run: scala-cli --power publish --cross Toolkit.scala publish-conf.scala 
 
       - name: Publish Toolkit for native
-        run: for i in {1..5}; do scala-cli --power publish --cross --native Toolkit.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
-        continue-on-error: true
-        env:
-          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
+        run: scala-cli --power publish --cross --native Toolkit.scala publish-conf.scala 
 
       - name: Publish Toolkit for JS
-        run: for i in {1..5}; do scala-cli --power publish --cross --js Toolkit.js.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        run: scala-cli --power publish --cross --js Toolkit.scala publish-conf.scala 
         continue-on-error: true
-        env:
-          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
 
       - name: Publish Toolkit Test for JVM
-        run: for i in {1..5}; do scala-cli --power publish --toolkit $TOOLKIT_VERSION --cross ToolkitTest.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        run: scala-cli --power publish --toolkit $TOOLKIT_VERSION --cross ToolkitTest.scala publish-conf.scala 
         continue-on-error: true
         env:
           TOOLKIT_VERSION: ${{ github.ref_name }}
-          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
-    
+
       - name: Publish Toolkit Test for native
-        run: for i in {1..5}; do scala-cli --power publish --toolkit $TOOLKIT_VERSION --cross --native ToolkitTest.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        run: scala-cli --power publish --native --toolkit $TOOLKIT_VERSION --cross ToolkitTest.scala publish-conf.scala 
         continue-on-error: true
         env:
           TOOLKIT_VERSION: ${{ github.ref_name }}
-          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
 
       - name: Publish Toolkit Test for JS
-        run: for i in {1..5}; do scala-cli --power publish --toolkit $TOOLKIT_VERSION --cross --js ToolkitTest.scala publish-conf.scala --password env:OSSRH_PASSWORD --user env:OSSRH_USERNAME --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        run: scala-cli --power publish --js --toolkit $TOOLKIT_VERSION --cross ToolkitTest.scala publish-conf.scala 
         continue-on-error: true
         env:
           TOOLKIT_VERSION: ${{ github.ref_name }}
-          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
