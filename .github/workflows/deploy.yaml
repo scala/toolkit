@@ -3,6 +3,7 @@ name: Publish toolkit
 on:
   release:
     types: [published]
+    workflow_dispatch:
 
 env:
   OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
@@ -25,14 +26,35 @@ jobs:
       - name: Setup Scala CLI
         uses: VirtusLab/scala-cli-setup@main
 
-      - name: Publish Toolkit locally for JVM
-        run: scala-cli --power publish local --cross Toolkit.scala publish-conf.scala 
-      
-      - name: Publish Toolkit locally for native
-        run: scala-cli --power publish local --cross --native Toolkit.scala publish-conf.scala 
 
-      - name: Publish Toolkit locally for JS
-        run: scala-cli --power publish local --cross --js Toolkit.scala publish-conf.scala 
+      - name: Import GPG key
+        id: import_gpg
+        run: |
+          echo "${{ secrets.PGP_SECRET }}" | base64 --decode > private.key
+          gpg --import --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.PGP_PASSPHRASE }}" private.key
+          echo "fingerprint=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr:/ { print $10 }')" >> $GITHUB_ENV
+          rm private.key
+        with:
+          gpg_private_key: ${{ secrets.PGP_SECRET }}
+          passphrase: ${{ secrets.PGP_PASSPHRASE }}
+
+      - name: Local publish Toolkit for JVM
+        run: for i in {1..5}; do scala-cli --power publish local --cross Toolkit.scala publish-conf.scala --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        continue-on-error: true
+        env:
+          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
+          
+      - name: Local publish Toolkit for native
+        run: for i in {1..5}; do scala-cli --power publish local --cross --native Toolkit.scala publish-conf.scala --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        continue-on-error: true
+        env:
+          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
+
+      - name: Local publish Toolkit for js
+        run: for i in {1..5}; do scala-cli --power publish local --cross --js Toolkit.scala publish-conf.scala --gpg-key $PGP_KEY_ID --gpg-option --pinentry-mode --gpg-option loopback --gpg-option --passphrase --gpg-option $PGP_PASSWORD && break || sleep 15; done
+        continue-on-error: true
+        env:
+          PGP_KEY_ID: ${{ steps.import_gpg.outputs.fingerprint }}
 
       - name: Publish Toolkit for JVM
         run: scala-cli --power publish --cross Toolkit.scala publish-conf.scala 
