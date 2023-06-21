@@ -1,10 +1,10 @@
 # The Scala Toolkit
-The batteries-included Scala. Read about the Scala Toolkit in [Scala Toolkit makes Scala powerful straight out of the box](https://virtuslab.com/blog/scala-toolkit-makes-scala-powerful-straight-out-of-the-box/).
+The batteries-included Scala. Read about the Scala Toolkit in [scala-lang tutorials](https://docs.scala-lang.org/toolkit/introduction.html).
 
 ## Using the Scala Toolkit
 
-The Scala Toolkit is currently in pre-release stage. However, you can already use it from [Scala CLI](https://scala-cli.virtuslab.org/):
+You can already use it from [Scala CLI](https://scala-cli.virtuslab.org/):
 ```scala
-//> using toolkit "latest"
+//> using toolkit latest
 ```
-Or by including the latest Toolkit artifact in your build file: `org.scala-lang::toolkit:0.1.7`
+Or by including the latest Toolkit artifact in your build file: `org.scala-lang::toolkit:0.2.0`
