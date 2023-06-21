@@ -3,6 +3,7 @@ import scala.util.matching.Regex
 import upickle.default.*
 import coursier.graph.DependencyTree
 import Dependencies.*
+import coursier.*
 
 object Dependencies:
   case class Version(major: Int, minor: Int, patch: Int, suffix: Option[String] = None) extends Ordered[Version] derives ReadWriter:
@@ -33,7 +34,13 @@ object Dependencies:
           case Version(_, 0, 0, _) => MajorUpdate
           case Version(_, _, 0, _) => MinorUpdate
           case _ => PatchUpdate
-      else throw new IllegalArgumentException("Versions are the same")
+      else throw new IllegalArgumentException("Versions are the same: " + oldVersion + " -> " + newVersion)
+    
+    def parse(s: String): Option[Version] = 
+      val regex = """(\d+)\.(\d+)\.(\d+)(-[a-zA-Z\d\.]+)?""".r
+      s match
+        case regex(major, minor, patch, suffix) => Some(Version(major.toInt, minor.toInt, patch.toInt, Option(suffix).map(_.drop(1))))
+        case _ => None
 
 
   sealed abstract class VersionDiff(val order: Int) extends Ordered[VersionDiff]:
@@ -43,25 +50,28 @@ object Dependencies:
   case object MajorUpdate extends VersionDiff(2)
 
   object VersionString:
-    def unapply(s: String): Option[Version] =
-      val regex = """(\d+)\.(\d+)\.(\d+)(-[a-zA-Z\d\.]+)?""".r
-      s match
-        case regex(major, minor, patch, suffix) => Some(Version(major.toInt, minor.toInt, patch.toInt, Option(suffix).map(_.drop(1))))
-        case _ => None
+    def unapply(s: String): Option[Version] = Version.parse(s)
 
   case class Dep(id: String, version: Version, deps: List[Dep]) derives ReadWriter:
     override def toString: String = s"$id:$version"
 
+  object Dep:
+    def resolve(org: String, module: String, crossVersion: String, version: Version): Dep =
+      val dep = Dependency(Module(Organization(org), ModuleName(module + "_" + crossVersion)), version.toString)
+      val resolution = Resolve()
+          .addDependencies(dep)
+          .run()
+      
+      val head = DependencyTree(resolution).head
+      makeDepTree(head)
 
-  def makeDepTree(tree: DependencyTree): Dep =
-    val dep = tree.dependency
-    val depId = s"${dep.module.organization.value}:${dep.module.name.value}"
-    val versionParsed = VersionString.unapply(dep.version)
-    versionParsed match
-      case Some(version) => Dep(dep.module.toString(), version, tree.children.map(makeDepTree).toList)
-      case None => throw new Exception(s"Could not parse version from $depId:${dep.version}")
-    
-
+    def makeDepTree(tree: DependencyTree): Dep =
+      val dep = tree.dependency
+      val depId = s"${dep.module.organization.value}:${dep.module.name.value}"
+      val versionParsed = Version.parse(dep.version)
+      versionParsed match
+        case Some(version) => Dep(dep.module.toString(), version, tree.children.map(makeDepTree).toList)
+        case None => throw new Exception(s"Could not parse version from $depId:${dep.version}")
 object Utility:
   def requireCmd(cmd: String): Unit =
       if Try(os.proc("which", cmd).call()).isFailure then
