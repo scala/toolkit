@@ -9,7 +9,7 @@ object Dependencies:
   case class Version(major: Int, minor: Int, patch: Int, suffix: Option[String] = None) extends Ordered[Version] derives ReadWriter:
     def compare(that: Version): Int =
       Ordering[(Int, Int, Int, Option[String])].compare((this.major, this.minor, this.patch, this.suffix), (that.major, that.minor, that.patch, that.suffix))
-    override def toString: String = s"$major.$minor.$patch"
+    override def toString: String = s"$major.$minor.$patch${suffix.fold("")(s => s"-$s")}"
     def getDiff(that: Version): VersionDiff = Version.compareVersions(this, that)
 
   object Version:
@@ -36,10 +36,15 @@ object Dependencies:
           case _ => PatchUpdate
       else throw new IllegalArgumentException("Versions are the same: " + oldVersion + " -> " + newVersion)
     
+    /**
+      * Parses a version string into a Version object.
+      * Format: major.minor[.patch][-suffix]
+      * Lacking patch is treated as 0
+      */
     def parse(s: String): Option[Version] = 
-      val regex = """(\d+)\.(\d+)\.(\d+)(-[a-zA-Z\d\.]+)?""".r
+      val regex = """(\d+)\.(\d+)(\.\d+)?(-[a-zA-Z\d\.]+)?""".r
       s match
-        case regex(major, minor, patch, suffix) => Some(Version(major.toInt, minor.toInt, patch.toInt, Option(suffix).map(_.drop(1))))
+        case regex(major, minor, patch, suffix) => Some(Version(major.toInt, minor.toInt, Option(patch).map(_.drop(1).toInt).getOrElse(0), Option(suffix).map(_.drop(1))))
         case _ => None
 
 
@@ -72,8 +77,3 @@ object Dependencies:
       versionParsed match
         case Some(version) => Dep(dep.module.toString(), version, tree.children.map(makeDepTree).toList)
         case None => throw new Exception(s"Could not parse version from $depId:${dep.version}")
-object Utility:
-  def requireCmd(cmd: String): Unit =
-      if Try(os.proc("which", cmd).call()).isFailure then
-          println(s"Please install $cmd")
-          sys.exit(1)
