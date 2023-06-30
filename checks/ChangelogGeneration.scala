@@ -26,7 +26,7 @@ case class IllegalDiff(diff: Diff, leastOrderLegalUpdate: VersionDiff):
   override def toString: String = s"$diff (required at least: $leastOrderLegalUpdate)"
 
 
-case class Changelog(directChanges: Set[Diff], indirectChanges: Set[Diff]) derives ReadWriter:
+case class Changelog(moduleName: String, directChanges: Set[Diff], indirectChanges: Set[Diff]) derives ReadWriter:
 
   def diff(other: Changelog): Option[String] = 
     if other == this then
@@ -44,19 +44,19 @@ case class Changelog(directChanges: Set[Diff], indirectChanges: Set[Diff]) deriv
     
   def toMd: String = 
     val directChangesSection = if directChanges.isEmpty then "" else
-      val directChangesHeader = "## Changes to direct dependencies"
+      val directChangesHeader = "\n## Changes to direct dependencies"
       val directChangesList = directChanges.map(diff => s" - ${diff.toString}").toList.sorted
-      (directChangesHeader :: directChangesList).mkString("\n")
+      (directChangesHeader :: directChangesList).mkString("\n") + "\n"
     val indirectChangesSection = if indirectChanges.isEmpty then "" else
-      val indirectChangesHeader = "## Changes to transitive dependencies"
+      val indirectChangesHeader = "\n## Changes to transitive dependencies"
       val indirectChangesList = indirectChanges.map(diff => s" - ${diff.toString}").toList.sorted
-      (indirectChangesHeader :: indirectChangesList).mkString("\n")
-    val header = s"# Changelog for ${Config.name} ${Config.developmentVersion}"
-    header + "\n" + directChangesSection + "\n" + indirectChangesSection
+      (indirectChangesHeader :: indirectChangesList).mkString("\n") + "\n"
+    val header = s"# Changelog for ${moduleName} ${Config.developmentVersion}"
+    header + "\n" + directChangesSection + indirectChangesSection
 
 object Changelog:
-  def generate(diffs: List[Diff]): Changelog =
+  def generate(moduleName: String, diffs: List[Diff]): Changelog =
     val parentDiff = diffs.find(_.under.isEmpty).getOrElse(throw new Exception("No parent diff found"))
     val parentId = Diff.getOldDep(parentDiff).getOrElse(throw new Exception(s"Illegal parent diff: ${parentDiff}")).id
     val (directChanges, indirectChanges) = diffs.partition(_.under.exists(_.id == parentId))
-    Changelog(directChanges.toSet, indirectChanges.toSet - parentDiff)
+    Changelog(moduleName, directChanges.toSet, indirectChanges.toSet - parentDiff)

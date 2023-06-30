@@ -4,6 +4,7 @@ import upickle.default.*
 import coursier.graph.DependencyTree
 import Dependencies.*
 import coursier.*
+import scala.annotation.tailrec
 
 object Dependencies:
   case class Version(major: Int, minor: Int, patch: Int, suffix: Option[String] = None) extends Ordered[Version] derives ReadWriter:
@@ -59,6 +60,7 @@ object Dependencies:
 
   case class Dep(id: String, version: Version, deps: List[Dep]) derives ReadWriter:
     override def toString: String = s"$id:$version"
+    def toMdTree: String = Dep.toMdTreeRec(List((this, 0)), Set.empty, "")
 
   object Dep:
     def resolve(org: String, module: String, crossVersion: String, version: Version): Dep =
@@ -77,3 +79,17 @@ object Dependencies:
       versionParsed match
         case Some(version) => Dep(dep.module.toString(), version, tree.children.map(makeDepTree).toList)
         case None => throw new Exception(s"Could not parse version from $depId:${dep.version}")
+      
+    @tailrec
+    private def toMdTreeRec(queue: List[(Dep, Int)], visited: Set[Dep], resultAcc: String): String = 
+      queue match
+        case Nil => resultAcc
+        case (head, depth) :: tail if visited.contains(head) => 
+          toMdTreeRec(tail, visited, resultAcc + "\n" + ("  " * depth) + s" - ${head.id}:${head.version} (already listed)")
+        case (head, depth) :: tail =>
+          val children = head.deps.map((_, depth + 1))
+          val updatedResult = resultAcc + "\n" + ("  " * depth) + s" - ${head.id}:${head.version}"
+          toMdTreeRec(children ++ tail, visited + head, updatedResult)
+          
+
+          

@@ -1,0 +1,278 @@
+# Changelog for toolkit-test 0.2.0
+
+## Changes to direct dependencies
+ - Added `org.scala-lang:toolkit_native0.4_2.13:0.2.0` under `org.scala-lang:toolkit-test_native0.4_2.13:0.2.0`
+
+## Changes to transitive dependencies
+ - Added `com.lihaoyi:geny_native0.4_2.13:1.0.0` under `com.lihaoyi:os-lib_native0.4_2.13:0.9.1`
+ - Added `com.lihaoyi:geny_native0.4_2.13:1.0.0` under `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0`
+ - Added `com.lihaoyi:os-lib_native0.4_2.13:0.9.1` under `org.scala-lang:toolkit_native0.4_2.13:0.2.0`
+ - Added `com.lihaoyi:ujson_native0.4_2.13:3.1.0` under `com.lihaoyi:upickle_native0.4_2.13:3.0.0`
+ - Added `com.lihaoyi:ujson_native0.4_2.13:3.1.0` under `com.lihaoyi:upickle_native0.4_2.13:3.1.0`
+ - Added `com.lihaoyi:upack_native0.4_2.13:3.1.0` under `com.lihaoyi:upickle_native0.4_2.13:3.0.0`
+ - Added `com.lihaoyi:upack_native0.4_2.13:3.1.0` under `com.lihaoyi:upickle_native0.4_2.13:3.1.0`
+ - Added `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0` under `com.lihaoyi:ujson_native0.4_2.13:3.1.0`
+ - Added `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0` under `com.lihaoyi:upack_native0.4_2.13:3.1.0`
+ - Added `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0` under `com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0`
+ - Added `com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0` under `com.lihaoyi:upickle_native0.4_2.13:3.0.0`
+ - Added `com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0` under `com.lihaoyi:upickle_native0.4_2.13:3.1.0`
+ - Added `com.lihaoyi:upickle_native0.4_2.13:3.0.0` under `com.softwaremill.sttp.client4:upickle_native0.4_2.13:4.0.0-M1`
+ - Added `com.lihaoyi:upickle_native0.4_2.13:3.1.0` under `org.scala-lang:toolkit_native0.4_2.13:0.2.0`
+ - Added `com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1` under `com.softwaremill.sttp.client4:json-common_native0.4_2.13:4.0.0-M1`
+ - Added `com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1` under `com.softwaremill.sttp.client4:upickle_native0.4_2.13:4.0.0-M1`
+ - Added `com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1` under `org.scala-lang:toolkit_native0.4_2.13:0.2.0`
+ - Added `com.softwaremill.sttp.client4:json-common_native0.4_2.13:4.0.0-M1` under `com.softwaremill.sttp.client4:upickle_native0.4_2.13:4.0.0-M1`
+ - Added `com.softwaremill.sttp.client4:upickle_native0.4_2.13:4.0.0-M1` under `org.scala-lang:toolkit_native0.4_2.13:0.2.0`
+ - Added `com.softwaremill.sttp.model:core_native0.4_2.13:1.5.5` under `com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1`
+ - Added `com.softwaremill.sttp.model:core_native0.4_2.13:1.5.5` under `com.softwaremill.sttp.shared:ws_native0.4_2.13:1.3.13`
+ - Added `com.softwaremill.sttp.shared:core_native0.4_2.13:1.3.13` under `com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1`
+ - Added `com.softwaremill.sttp.shared:core_native0.4_2.13:1.3.13` under `com.softwaremill.sttp.shared:ws_native0.4_2.13:1.3.13`
+ - Added `com.softwaremill.sttp.shared:ws_native0.4_2.13:1.3.13` under `com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.lihaoyi:os-lib_native0.4_2.13:0.9.1`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.lihaoyi:ujson_native0.4_2.13:3.1.0`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.lihaoyi:upack_native0.4_2.13:3.1.0`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.lihaoyi:upickle_native0.4_2.13:3.0.0`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.lihaoyi:upickle_native0.4_2.13:3.1.0`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.softwaremill.sttp.client4:json-common_native0.4_2.13:4.0.0-M1`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.softwaremill.sttp.client4:upickle_native0.4_2.13:4.0.0-M1`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.softwaremill.sttp.model:core_native0.4_2.13:1.5.5`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.softwaremill.sttp.shared:core_native0.4_2.13:1.3.13`
+ - Added `org.scala-lang:scala-library:2.13.10` under `com.softwaremill.sttp.shared:ws_native0.4_2.13:1.3.13`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-lang:scala-reflect:2.13.10`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:auxlib_native0.4_2.13:0.4.10`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:auxlib_native0.4_2.13:0.4.12`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:auxlib_native0.4_2.13:0.4.5`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:clib_native0.4_2.13:0.4.12`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:javalib_native0.4_2.13:0.4.10`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:javalib_native0.4_2.13:0.4.12`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:javalib_native0.4_2.13:0.4.5`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:junit-runtime_native0.4_2.13:0.4.10`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:nativelib_native0.4_2.13:0.4.10`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:nativelib_native0.4_2.13:0.4.12`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:nativelib_native0.4_2.13:0.4.5`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:posixlib_native0.4_2.13:0.4.12`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:scalalib_native0.4_2.13:0.4.10`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:scalalib_native0.4_2.13:0.4.12`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:scalalib_native0.4_2.13:0.4.5`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:test-interface-sbt-defs_native0.4_2.13:0.4.10`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:test-interface_native0.4_2.13:0.4.10`
+ - Added `org.scala-lang:scala-library:2.13.10` under `org.scala-native:windowslib_native0.4_2.13:0.4.12`
+ - Added `org.scala-lang:scala-library:2.13.8` under `com.lihaoyi:geny_native0.4_2.13:1.0.0`
+ - Added `org.scala-lang:scala-reflect:2.13.10` under `org.scala-native:nativelib_native0.4_2.13:0.4.10`
+ - Added `org.scala-lang:scala-reflect:2.13.10` under `org.scala-native:nativelib_native0.4_2.13:0.4.12`
+ - Added `org.scala-lang:scala-reflect:2.13.10` under `org.scala-native:nativelib_native0.4_2.13:0.4.5`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.10` under `com.lihaoyi:ujson_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.10` under `com.lihaoyi:upack_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle_native0.4_2.13:3.0.0`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.12` under `org.scala-native:scalalib_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.12` under `org.scala-native:scalalib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.12` under `org.scala-native:scalalib_native0.4_2.13:0.4.5`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.5` under `com.lihaoyi:geny_native0.4_2.13:1.0.0`
+ - Added `org.scala-native:auxlib_native0.4_2.13:0.4.5` under `com.lihaoyi:os-lib_native0.4_2.13:0.9.1`
+ - Added `org.scala-native:clib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:clib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:clib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.5`
+ - Added `org.scala-native:clib_native0.4_2.13:0.4.12` under `org.scala-native:posixlib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:clib_native0.4_2.13:0.4.12` under `org.scala-native:windowslib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.10` under `com.lihaoyi:ujson_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upack_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle_native0.4_2.13:3.0.0`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.12` under `org.scala-native:scalalib_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.12` under `org.scala-native:scalalib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.12` under `org.scala-native:scalalib_native0.4_2.13:0.4.5`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.5` under `com.lihaoyi:geny_native0.4_2.13:1.0.0`
+ - Added `org.scala-native:javalib_native0.4_2.13:0.4.5` under `com.lihaoyi:os-lib_native0.4_2.13:0.9.1`
+ - Added `org.scala-native:junit-runtime_native0.4_2.13:0.4.10` under `org.scala-native:test-interface_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.10` under `com.lihaoyi:ujson_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.10` under `com.lihaoyi:upack_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle_native0.4_2.13:3.0.0`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.12` under `org.scala-native:auxlib_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.12` under `org.scala-native:auxlib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.12` under `org.scala-native:auxlib_native0.4_2.13:0.4.5`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.12` under `org.scala-native:clib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.12` under `org.scala-native:posixlib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.12` under `org.scala-native:windowslib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.5` under `com.lihaoyi:geny_native0.4_2.13:1.0.0`
+ - Added `org.scala-native:nativelib_native0.4_2.13:0.4.5` under `com.lihaoyi:os-lib_native0.4_2.13:0.9.1`
+ - Added `org.scala-native:posixlib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:posixlib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:posixlib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.5`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.lihaoyi:ujson_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upack_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle-core_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle_native0.4_2.13:3.0.0`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.lihaoyi:upickle_native0.4_2.13:3.1.0`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.softwaremill.sttp.client4:json-common_native0.4_2.13:4.0.0-M1`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.softwaremill.sttp.client4:upickle_native0.4_2.13:4.0.0-M1`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.softwaremill.sttp.model:core_native0.4_2.13:1.5.5`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.softwaremill.sttp.shared:core_native0.4_2.13:1.3.13`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `com.softwaremill.sttp.shared:ws_native0.4_2.13:1.3.13`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `org.scala-native:test-interface-sbt-defs_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.10` under `org.scala-native:test-interface_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.12` under `org.scala-lang:toolkit_native0.4_2.13:0.2.0`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.5` under `com.lihaoyi:geny_native0.4_2.13:1.0.0`
+ - Added `org.scala-native:scalalib_native0.4_2.13:0.4.5` under `com.lihaoyi:os-lib_native0.4_2.13:0.9.1`
+ - Added `org.scala-native:test-interface-sbt-defs_native0.4_2.13:0.4.10` under `org.scala-native:junit-runtime_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:test-interface-sbt-defs_native0.4_2.13:0.4.10` under `org.scala-native:test-interface_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:test-interface_native0.4_2.13:0.4.10` under `com.softwaremill.sttp.shared:core_native0.4_2.13:1.3.13`
+ - Added `org.scala-native:test-interface_native0.4_2.13:0.4.10` under `com.softwaremill.sttp.shared:ws_native0.4_2.13:1.3.13`
+ - Added `org.scala-native:windowslib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.10`
+ - Added `org.scala-native:windowslib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.12`
+ - Added `org.scala-native:windowslib_native0.4_2.13:0.4.12` under `org.scala-native:javalib_native0.4_2.13:0.4.5`
+
+## Full dependency tree
+
+ - org.scala-lang:toolkit-test_native0.4_2.13:0.2.0
+   - org.scala-lang:toolkit_native0.4_2.13:0.2.0
+     - com.lihaoyi:os-lib_native0.4_2.13:0.9.1
+       - com.lihaoyi:geny_native0.4_2.13:1.0.0
+         - org.scala-lang:scala-library:2.13.8
+         - org.scala-native:auxlib_native0.4_2.13:0.4.5
+           - org.scala-lang:scala-library:2.13.10
+           - org.scala-native:nativelib_native0.4_2.13:0.4.12
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-lang:scala-reflect:2.13.10
+               - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:javalib_native0.4_2.13:0.4.5
+           - org.scala-lang:scala-library:2.13.10 (already listed)
+           - org.scala-native:clib_native0.4_2.13:0.4.12
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:nativelib_native0.4_2.13:0.4.12 (already listed)
+           - org.scala-native:posixlib_native0.4_2.13:0.4.12
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:clib_native0.4_2.13:0.4.12 (already listed)
+             - org.scala-native:nativelib_native0.4_2.13:0.4.12 (already listed)
+           - org.scala-native:windowslib_native0.4_2.13:0.4.12
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:clib_native0.4_2.13:0.4.12 (already listed)
+             - org.scala-native:nativelib_native0.4_2.13:0.4.12 (already listed)
+         - org.scala-native:nativelib_native0.4_2.13:0.4.5
+           - org.scala-lang:scala-library:2.13.10 (already listed)
+           - org.scala-lang:scala-reflect:2.13.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.5
+           - org.scala-lang:scala-library:2.13.10 (already listed)
+           - org.scala-native:auxlib_native0.4_2.13:0.4.12
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:nativelib_native0.4_2.13:0.4.12 (already listed)
+           - org.scala-native:javalib_native0.4_2.13:0.4.12
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:clib_native0.4_2.13:0.4.12 (already listed)
+             - org.scala-native:posixlib_native0.4_2.13:0.4.12 (already listed)
+             - org.scala-native:windowslib_native0.4_2.13:0.4.12 (already listed)
+       - org.scala-lang:scala-library:2.13.10 (already listed)
+       - org.scala-native:auxlib_native0.4_2.13:0.4.5 (already listed)
+       - org.scala-native:javalib_native0.4_2.13:0.4.5 (already listed)
+       - org.scala-native:nativelib_native0.4_2.13:0.4.5 (already listed)
+       - org.scala-native:scalalib_native0.4_2.13:0.4.5 (already listed)
+     - com.lihaoyi:upickle_native0.4_2.13:3.1.0
+       - com.lihaoyi:ujson_native0.4_2.13:3.1.0
+         - com.lihaoyi:upickle-core_native0.4_2.13:3.1.0
+           - com.lihaoyi:geny_native0.4_2.13:1.0.0 (already listed)
+           - org.scala-lang:scala-library:2.13.10 (already listed)
+           - org.scala-native:auxlib_native0.4_2.13:0.4.10
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:nativelib_native0.4_2.13:0.4.12 (already listed)
+           - org.scala-native:javalib_native0.4_2.13:0.4.10
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:clib_native0.4_2.13:0.4.12 (already listed)
+             - org.scala-native:posixlib_native0.4_2.13:0.4.12 (already listed)
+             - org.scala-native:windowslib_native0.4_2.13:0.4.12 (already listed)
+           - org.scala-native:nativelib_native0.4_2.13:0.4.10
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-lang:scala-reflect:2.13.10 (already listed)
+           - org.scala-native:scalalib_native0.4_2.13:0.4.10
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:auxlib_native0.4_2.13:0.4.12 (already listed)
+             - org.scala-native:javalib_native0.4_2.13:0.4.12 (already listed)
+         - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:auxlib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:javalib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:nativelib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+       - com.lihaoyi:upack_native0.4_2.13:3.1.0
+         - com.lihaoyi:upickle-core_native0.4_2.13:3.1.0 (already listed)
+         - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:auxlib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:javalib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:nativelib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+       - com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0
+         - com.lihaoyi:upickle-core_native0.4_2.13:3.1.0 (already listed)
+         - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:auxlib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:javalib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:nativelib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+       - org.scala-lang:scala-library:2.13.10 (already listed)
+       - org.scala-native:auxlib_native0.4_2.13:0.4.10 (already listed)
+       - org.scala-native:javalib_native0.4_2.13:0.4.10 (already listed)
+       - org.scala-native:nativelib_native0.4_2.13:0.4.10 (already listed)
+       - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+     - com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1
+       - com.softwaremill.sttp.model:core_native0.4_2.13:1.5.5
+         - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+       - com.softwaremill.sttp.shared:core_native0.4_2.13:1.3.13
+         - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:test-interface_native0.4_2.13:0.4.10
+           - org.scala-lang:scala-library:2.13.10 (already listed)
+           - org.scala-native:junit-runtime_native0.4_2.13:0.4.10
+             - org.scala-lang:scala-library:2.13.10 (already listed)
+             - org.scala-native:test-interface-sbt-defs_native0.4_2.13:0.4.10
+               - org.scala-lang:scala-library:2.13.10 (already listed)
+               - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+           - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+           - org.scala-native:test-interface-sbt-defs_native0.4_2.13:0.4.10 (already listed)
+       - com.softwaremill.sttp.shared:ws_native0.4_2.13:1.3.13
+         - com.softwaremill.sttp.model:core_native0.4_2.13:1.5.5 (already listed)
+         - com.softwaremill.sttp.shared:core_native0.4_2.13:1.3.13 (already listed)
+         - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:test-interface_native0.4_2.13:0.4.10 (already listed)
+       - org.scala-lang:scala-library:2.13.10 (already listed)
+       - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+     - com.softwaremill.sttp.client4:upickle_native0.4_2.13:4.0.0-M1
+       - com.lihaoyi:upickle_native0.4_2.13:3.0.0
+         - com.lihaoyi:ujson_native0.4_2.13:3.1.0 (already listed)
+         - com.lihaoyi:upack_native0.4_2.13:3.1.0 (already listed)
+         - com.lihaoyi:upickle-implicits_native0.4_2.13:3.1.0 (already listed)
+         - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:auxlib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:javalib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:nativelib_native0.4_2.13:0.4.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+       - com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1 (already listed)
+       - com.softwaremill.sttp.client4:json-common_native0.4_2.13:4.0.0-M1
+         - com.softwaremill.sttp.client4:core_native0.4_2.13:4.0.0-M1 (already listed)
+         - org.scala-lang:scala-library:2.13.10 (already listed)
+         - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+       - org.scala-lang:scala-library:2.13.10 (already listed)
+       - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+     - org.scala-native:scalalib_native0.4_2.13:0.4.12
+       - org.scala-lang:scala-library:2.13.10 (already listed)
+       - org.scala-native:auxlib_native0.4_2.13:0.4.12 (already listed)
+       - org.scala-native:javalib_native0.4_2.13:0.4.12 (already listed)
+   - org.scala-native:scalalib_native0.4_2.13:0.4.12 (already listed)
+   - org.scalameta:munit_native0.4_2.13:1.0.0-M7
+     - org.scala-lang:scala-library:2.13.10 (already listed)
+     - org.scala-native:scalalib_native0.4_2.13:0.4.5 (already listed)
+     - org.scala-native:test-interface_native0.4_2.13:0.4.5
+       - org.scala-lang:scala-library:2.13.10 (already listed)
+       - org.scala-native:junit-runtime_native0.4_2.13:0.4.10 (already listed)
+       - org.scala-native:scalalib_native0.4_2.13:0.4.10 (already listed)
+       - org.scala-native:test-interface-sbt-defs_native0.4_2.13:0.4.10 (already listed)

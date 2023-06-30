@@ -11,12 +11,19 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import ox.*
 import caseapp._
 
-case class Params(file: String, overwrite: Boolean = false, yes: Boolean = false, skip: List[String] = Nil)
+case class Params(file: String, moduleName: String, overwrite: Boolean = false, yes: Boolean = false, skip: List[String] = Nil, moduleDep: Option[String] = None)
 
 var params: Params = _
 
 private def publish(flag: Option[String]) = 
-    os.proc("scala-cli", "--power", "publish", "local", "--cross", flag.map(f => s"--$f").toList, "--organization", Config.organization, "--version", Config.developmentVersion.toString, params.file).call()
+    val file = params.moduleDep match
+      case None => params.file
+      case Some(dep) =>
+        val copy = os.temp(os.read(os.pwd / params.file), suffix = ".scala")
+        val moduleDep = s"${Config.organization}::$dep::${Config.developmentVersion}"
+        os.write.append(copy, s"\n//> using dep ${moduleDep}")
+        copy.toString
+    os.proc("scala-cli", "--power", "publish", "local", "--cross", flag.map(f => s"--$f").toList, "--organization", Config.organization, "--version", Config.developmentVersion.toString, file).call()
 
 @main
 def main(args: String*) =
@@ -27,24 +34,24 @@ def main(args: String*) =
       sys.exit(1)
     case Right((params, leftover)) => params
 
-  val platformsSkipped = Config.platforms.filterNot(p => p._1.exists(params.skip.contains)).toList 
+  val platformsSkipped = Config.platforms.filterNot(p => params.skip.contains(p._1)).toList 
 
   println("Publishing locally to validate the dependency tree...")
 
   val trees = scoped {
     forkAllHold(
       for
-        (option, _) <- platformsSkipped
+        (_, option, _) <- platformsSkipped
       yield () => publish(option)
     ).join()
 
     forkAllHold(
       for 
         crossVersion <- Config.crossVersions
-        (_, platform) <- platformsSkipped
+        (_, _, platform) <- platformsSkipped
         versionSuffix = platform.map(p => s"${p}_").getOrElse("") + crossVersion
-        previousSnapshot = fork(Dep.resolve(Config.organization, Config.name, versionSuffix, Config.releaseVersion))
-        currentSnapshot = fork(Dep.resolve(Config.organization, Config.name, versionSuffix, Config.developmentVersion))
+        previousSnapshot = fork(Dep.resolve(Config.organization, params.moduleName, versionSuffix, Config.releaseVersion))
+        currentSnapshot = fork(Dep.resolve(Config.organization, params.moduleName, versionSuffix, Config.developmentVersion))
       yield () => (versionSuffix, previousSnapshot.join(), currentSnapshot.join())
     ).join()
   }
@@ -53,6 +60,9 @@ def main(args: String*) =
 end main
 
 def checkTree(releasedVersion: String, previousSnapshot: Dep, currentSnapshot: Dep) = 
+  println("Previous snapshot:" + previousSnapshot + " " + previousSnapshot.deps.map(_.toString))
+  println("Current snapshot:" + currentSnapshot + " " + currentSnapshot.deps.map(_.toString))
+
   println(s"\nChecking tree for $releasedVersion...")
 
   val summary = SnapshotDiffValidator.summarize(previousSnapshot, currentSnapshot)
@@ -71,13 +81,14 @@ def checkTree(releasedVersion: String, previousSnapshot: Dep, currentSnapshot: D
   else 
     println("No diffs found")
 
-  val generatedChangelog = Changelog.generate(summary.diffs)
+  val generatedChangelog = Changelog.generate(params.moduleName, summary.diffs)
   val changelogDir = Config.changelogDir
-  val changelogJson = changelogDir / "json" / s"${Config.developmentVersion}_${releasedVersion}_changelog.json"
+  val baseFileName = s"${params.moduleName}_${Config.developmentVersion}_${releasedVersion}_changelog"
+  val changelogJson = changelogDir / "json" / s"${baseFileName}.json"
   if !os.exists(changelogJson) then 
     println("No changelog found, comparing with empty changelog.")
     os.makeDir.all(changelogDir / "json")
-  val parsedChangelog = if(os.exists(changelogJson)) then read[Changelog](os.read(changelogJson)) else Changelog(Set.empty, Set.empty)
+  val parsedChangelog = if(os.exists(changelogJson)) then read[Changelog](os.read(changelogJson)) else Changelog(params.moduleName, Set.empty, Set.empty)
   def changelogsDiff = generatedChangelog.diff(parsedChangelog)
 
   if changelogsDiff.nonEmpty then
@@ -90,8 +101,10 @@ def checkTree(releasedVersion: String, previousSnapshot: Dep, currentSnapshot: D
       if input == "y" || input == "Y" then
         os.write.over(changelogJson, write(generatedChangelog))
         val changelogReadable = generatedChangelog.toMd
-        val changelogMd = changelogDir / s"${Config.developmentVersion}_${releasedVersion}_changelog.md"
+        val changelogMd = changelogDir / s"${baseFileName}.md"
         os.write.over(changelogMd, changelogReadable)
+        os.write.append(changelogMd, "\n## Full dependency tree\n")
+        os.write.append(changelogMd, currentSnapshot.toMdTree + "\n")
         println("Overwritten")
       else
         println("Changes rejected")
