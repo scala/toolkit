@@ -29,8 +29,8 @@ jobs:
       - name: Test changelog and dependency tree semver compliance
         run: |
           scala-cli checks -- --module-name toolkit --file Toolkit.scala --skip js 
-          scala-cli checks -- --module-name toolkit --file Toolkit.js.scala --skip jvm --skip native --overwrite
-          scala-cli checks -- --module-name toolkit-test --file ToolkitTest.scala --overwrite --module-dep toolkit
+          scala-cli checks -- --module-name toolkit --file Toolkit.js.scala --skip jvm --skip native
+          scala-cli checks -- --module-name toolkit-test --file ToolkitTest.scala --module-dep toolkit
 
       - name: Import GPG key
         id: import_gpg
