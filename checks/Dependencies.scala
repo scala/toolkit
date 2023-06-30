@@ -90,6 +90,3 @@ object Dependencies:
           val children = head.deps.map((_, depth + 1))
           val updatedResult = resultAcc + "\n" + ("  " * depth) + s" - ${head.id}:${head.version}"
           toMdTreeRec(children ++ tail, visited + head, updatedResult)
-          
-
-          
