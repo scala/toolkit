@@ -60,9 +60,6 @@ def main(args: String*) =
 end main
 
 def checkTree(releasedVersion: String, previousSnapshot: Dep, currentSnapshot: Dep) = 
-  println("Previous snapshot:" + previousSnapshot + " " + previousSnapshot.deps.map(_.toString))
-  println("Current snapshot:" + currentSnapshot + " " + currentSnapshot.deps.map(_.toString))
-
   println(s"\nChecking tree for $releasedVersion...")
 
   val summary = SnapshotDiffValidator.summarize(previousSnapshot, currentSnapshot)
