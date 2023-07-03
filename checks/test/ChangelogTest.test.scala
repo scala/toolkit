@@ -12,7 +12,7 @@ class ChangelogTest extends munit.FunSuite:
     )
 
     override val munitTimeout = Duration(90, "s")
-    test("Pass if no changes occurred".only):
+    test("Pass if no changes occurred"):
         val change = LibraryChange("example", 
             Version(1,0,0) -> Version(1,0,1), 
             baseDeps -> baseDeps
