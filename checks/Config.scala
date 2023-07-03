@@ -19,3 +19,4 @@ object Config:
         val js = ("js", Some("js"), Some("sjs1"))
         val native = ("native", Some("native"), Some("native0.4"))
         val jvm = ("jvm", None, None)
+

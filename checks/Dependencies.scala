@@ -63,6 +63,20 @@ object Dependencies:
     def toMdTree: String = Dep.toMdTreeRec(List((this, 0)), Set.empty, "")
 
   object Dep:
+    private val dependenciesDisallowlist = Set(
+      ("org.scala-lang", "scala-library"), 
+      ("org.scala-lang", "scala3-library"), 
+      ("org.scala-lang", "scala-reflect"), 
+      ("org.scala-native", ""), // all
+      ("org.scala-js", "") // all
+    )
+
+    private def isAllowed(dep: DependencyTree): Boolean = 
+      val module = dep.dependency.module
+      dependenciesDisallowlist.forall { 
+        case (org, namePrefix) => module.organization.value != org || !module.name.value.startsWith(namePrefix) 
+      }
+
     def resolve(org: String, module: String, crossVersion: String, version: Version): Dep =
       val dep = Dependency(Module(Organization(org), ModuleName(module + "_" + crossVersion)), version.toString)
       val resolution = Resolve()
@@ -77,7 +91,7 @@ object Dependencies:
       val depId = s"${dep.module.organization.value}:${dep.module.name.value}"
       val versionParsed = Version.parse(dep.version)
       versionParsed match
-        case Some(version) => Dep(dep.module.toString(), version, tree.children.map(makeDepTree).toList)
+        case Some(version) => Dep(dep.module.toString(), version, tree.children.filter(isAllowed).map(makeDepTree).toList)
         case None => throw new Exception(s"Could not parse version from $depId:${dep.version}")
       
     @tailrec
