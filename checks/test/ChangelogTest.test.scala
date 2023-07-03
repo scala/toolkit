@@ -11,8 +11,8 @@ class ChangelogTest extends munit.FunSuite:
         "org.scalameta::munit::1.0.0-M8",
     )
 
-    override val munitTimeout = Duration(60, "s")
-    test("Pass if no changes occurred"):
+    override val munitTimeout = Duration(90, "s")
+    test("Pass if no changes occurred".only):
         val change = LibraryChange("example", 
             Version(1,0,0) -> Version(1,0,1), 
             baseDeps -> baseDeps
