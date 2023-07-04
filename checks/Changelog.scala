@@ -79,7 +79,7 @@ def checkTree(releasedVersion: String, previousSnapshot: Dep, currentSnapshot: D
     println("No diffs found")
 
   val generatedChangelog = Changelog.generate(params.moduleName, summary.diffs)
-  val changelogDir = Config.changelogDir
+  val changelogDir = Config.changelogDir / Config.developmentVersion.toString
   val baseFileName = s"${params.moduleName}_${Config.developmentVersion}_${releasedVersion}_changelog"
   val changelogJson = changelogDir / "json" / s"${baseFileName}.json"
   if !os.exists(changelogJson) then 

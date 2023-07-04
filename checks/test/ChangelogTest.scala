@@ -231,7 +231,10 @@ object ChangelogTest:
             check = false
         )
         if(runResult.exitCode == 0) then
-            val changelogs = os.list(outputDir / "json").map(path => (path, os.read(path))).map { case (path, content) => (path.last, read[Changelog](content))}.toList
+            val changelogs = os.list(outputDir)
+                .flatMap(path => os.list(path / "json"))
+                .map(path => (path, os.read(path)))
+                .map { case (path, content) => (path.last, read[Changelog](content))}.toList
             ChangelogSuccess(runResult.out.text(), changelogs)
         else
             ChangelogFailure(runResult.out.text())
