@@ -138,8 +138,8 @@ object SnapshotDiffValidator:
 
   def getLeastOrderLegalUpdate(versionDiff: VersionDiff, diff: Diff): VersionDiff =
     diff match 
-      case _: Removed => MajorUpdate
-      case _: Added => MinorUpdate
+      case _: Removed => VersionDiff.MajorUpdate
+      case _: Added => VersionDiff.MinorUpdate
       case DepUpdated(oldDep, newDep, _) =>
         Version.compareVersions(oldDep.version, newDep.version)
         

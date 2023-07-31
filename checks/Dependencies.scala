@@ -25,16 +25,16 @@ object Dependencies:
      *  - 1.1.2-M2 -> 1.1.2-M3 is a patch update
      */
     def compareVersions(oldVersion: Version, newVersion: Version): VersionDiff =
-      if oldVersion.major != newVersion.major then MajorUpdate
+      if oldVersion.major != newVersion.major then VersionDiff.MajorUpdate
       else if oldVersion.minor != newVersion.minor then
-        if oldVersion.minor < newVersion.minor then MinorUpdate
-        else MajorUpdate
-      else if oldVersion.patch != newVersion.patch then PatchUpdate
+        if oldVersion.minor < newVersion.minor then VersionDiff.MinorUpdate
+        else VersionDiff.MajorUpdate
+      else if oldVersion.patch != newVersion.patch then VersionDiff.PatchUpdate
       else if oldVersion.suffix != newVersion.suffix then 
         oldVersion match
-          case Version(_, 0, 0, _) => MajorUpdate
-          case Version(_, _, 0, _) => MinorUpdate
-          case _ => PatchUpdate
+          case Version(_, 0, 0, _) => VersionDiff.MajorUpdate
+          case Version(_, _, 0, _) => VersionDiff.MinorUpdate
+          case _ => VersionDiff.PatchUpdate
       else throw new IllegalArgumentException("Versions are the same: " + oldVersion + " -> " + newVersion)
     
     /**
@@ -49,11 +49,13 @@ object Dependencies:
         case _ => None
 
 
-  sealed abstract class VersionDiff(val order: Int) extends Ordered[VersionDiff]:
+  enum VersionDiff(val order: Int) extends Ordered[VersionDiff]:
+    case PatchUpdate extends VersionDiff(0)
+    case MinorUpdate extends VersionDiff(1)
+    case MajorUpdate extends VersionDiff(2)
+    
     def compare(that: VersionDiff): Int = order compare that.order
-  case object PatchUpdate extends VersionDiff(0)
-  case object MinorUpdate extends VersionDiff(1)
-  case object MajorUpdate extends VersionDiff(2)
+  
 
   object VersionString:
     def unapply(s: String): Option[Version] = Version.parse(s)
