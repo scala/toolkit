@@ -245,10 +245,10 @@ object ChangelogTest:
         // scala-cli config file write
         os.temp(s"""
         |//> using scala 2.13, 3
-        |//> using publish.name "$id"
-        |${deps.map(d => s"//> using lib $d").mkString("\n")}
-        |//> using publish.version "$version"
-        |//> using publish.organization "com.example"
+        |//> using publish.name $id
+        |${deps.map(d => s"//> using dep $d").mkString("\n")}
+        |//> using publish.version $version
+        |//> using publish.organization com.example
         | """.stripMargin, suffix = ".scala")
 
     private def publish(id: String, version: String, deps: List[String], skip: List[String] = Nil) = 
