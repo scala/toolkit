@@ -23,7 +23,7 @@ private def publish(flag: Option[String]) =
         val moduleDep = s"${Config.organization}::$dep::${Config.developmentVersion}"
         os.write.append(copy, s"\n//> using dep ${moduleDep}")
         copy.toString
-    os.proc("scala-cli", "--power", "publish", "local", "--cross", flag.map(f => s"--$f").toList, "--organization", Config.organization, "--version", Config.developmentVersion.toString, file).call()
+    os.proc("scala-cli", "--power", "publish", "local", "--cross", flag.map(f => s"--$f").toList, "--organization", Config.organization, "--project-version", Config.developmentVersion.toString, file).call()
 
 @main
 def main(args: String*) =
