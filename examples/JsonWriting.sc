@@ -1,4 +1,4 @@
-//> using toolkit "latest"
+//> using toolkit latest
 
 import upickle.default._
 

@@ -1,4 +1,4 @@
-//> using toolkit "latest"
+//> using toolkit latest
 
 import sttp.client4.quick.*
 
