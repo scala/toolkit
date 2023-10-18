@@ -49,7 +49,7 @@ object Dependencies:
         case _ => None
 
 
-  enum VersionDiff(val order: Int) extends Ordered[VersionDiff]:
+  enum VersionDiff(val order: Int) extends Ordered[VersionDiff] derives ReadWriter:
     case PatchUpdate extends VersionDiff(0)
     case MinorUpdate extends VersionDiff(1)
     case MajorUpdate extends VersionDiff(2)

@@ -66,10 +66,14 @@ def checkTree(releasedVersion: String, previousSnapshot: Dep, currentSnapshot: D
   if summary.illegalDiffs.nonEmpty then
     println(s"For $releasedVersion found diffs illegal to introduce on this update type: ${summary.updateType}")
     println(s"Illegal diffs: \n${summary.illegalDiffs.mkString(" - ", "\n - ", "\n")}")
-    if params.overwrite then
-      println("Could not generate changelog due to illegal diffs.")
-    println("Exiting with failure status (1)")
-    sys.exit(1)
+    val isException = os.read(os.pwd / "changelog" / "exceptions.txt").split("\n").contains(currentSnapshot.version.toString)
+    if isException then
+      println(currentSnapshot.version.toString + " is explicit exception, ignoring illegal diffs")
+    else
+      if params.overwrite then
+        println("Could not generate changelog due to illegal diffs.")
+      println("Exiting with failure status (1)")
+      sys.exit(1)
 
   val diffsFound = summary.diffs.nonEmpty
 
@@ -78,14 +82,14 @@ def checkTree(releasedVersion: String, previousSnapshot: Dep, currentSnapshot: D
   else 
     println("No diffs found")
 
-  val generatedChangelog = Changelog.generate(params.moduleName, summary.diffs)
+  val generatedChangelog = Changelog.generate(params.moduleName, summary)
   val changelogDir = Config.changelogDir / Config.developmentVersion.toString
   val baseFileName = s"${params.moduleName}_${Config.developmentVersion}_${releasedVersion}_changelog"
   val changelogJson = changelogDir / "json" / s"${baseFileName}.json"
   if !os.exists(changelogJson) then 
     println("No changelog found, comparing with empty changelog.")
     os.makeDir.all(changelogDir / "json")
-  val parsedChangelog = if(os.exists(changelogJson)) then read[Changelog](os.read(changelogJson)) else Changelog(params.moduleName, Set.empty, Set.empty)
+  val parsedChangelog = if(os.exists(changelogJson)) then read[Changelog](os.read(changelogJson)) else Changelog(params.moduleName, Set.empty, Set.empty, Map.empty)
   def changelogsDiff = generatedChangelog.diff(parsedChangelog)
 
   if changelogsDiff.nonEmpty then
