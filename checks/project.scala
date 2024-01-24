@@ -1,4 +1,4 @@
-//> using toolkit 0.2.0
+//> using toolkit 0.2.1
 //> using dep io.get-coursier:coursier_2.13:2.1.4
 //> using dep com.softwaremill.ox::core:0.0.6
 //> using dep com.github.alexarchambault:case-app_3:2.1.0-M24
