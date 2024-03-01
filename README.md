@@ -5,7 +5,7 @@ The batteries-included Scala. Read about the Scala Toolkit in [scala-lang tutori
 
 You can already use it from [Scala CLI](https://scala-cli.virtuslab.org/):
 ```scala
-//> using toolkit latest
+//> using toolkit default
 ```
 
 Or by including the latest Toolkit artifact in your build file: `org.scala-lang::toolkit:0.2.0`
