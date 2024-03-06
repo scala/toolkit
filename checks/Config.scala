@@ -5,8 +5,8 @@ object Config:
     val crossVersions = List("3", "2.13")
     val platforms = List(Platform.jvm, Platform.js, Platform.native)
     val changelogDir = valuePath("CHANGELOG_DIR", os.pwd / "changelog")
-    val releaseVersion = valueVersion("TOOLKIT_VERSION_RELEASE", Version(0,2,0))
-    val developmentVersion = valueVersion("TOOLKIT_VERSION_DEVELOPMENT", Version(0,2,1))
+    val releaseVersion = valueVersion("TOOLKIT_VERSION_RELEASE", Version(0,2,1))
+    val developmentVersion = valueVersion("TOOLKIT_VERSION_DEVELOPMENT", Version(0,2,2))
 
     private def valueVersion = value[Version](_, _, Version.parse(_).getOrElse(throw IllegalArgumentException("Invalid version")))
     private def valueStr = value[String](_, _, identity)
