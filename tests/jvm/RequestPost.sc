@@ -1,3 +1,5 @@
+//> using toolkit default
+
 import sttp.client4.quick.*
 
 val response = quickRequest
@@ -7,7 +9,7 @@ val response = quickRequest
 
 val firstLines = response.body.linesIterator.take(4).mkString("\n")
 println(firstLines)
-//> <!doctype html>
-//> <html>
-//> <head>
-//> <title>Example Domain</title>
+//$ <!doctype html>
+//$ <html>
+//$ <head>
+//$ <title>Example Domain</title>
