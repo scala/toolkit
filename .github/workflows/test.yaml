@@ -20,11 +20,11 @@ jobs:
       - name: Setup Scala CLI
         uses: VirtusLab/scala-cli-setup@main
 
-      - name: Test changelog and dependency tree semver compliance
+      - name: Test changelog compliance
         run: |
-          scala-cli checks -- --module-name toolkit --file Toolkit.scala --skip js 
-          scala-cli checks -- --module-name toolkit --file Toolkit.js.scala --skip jvm --skip native
-          scala-cli checks -- --module-name toolkit-test --file ToolkitTest.scala --module-dep toolkit
+          scala-cli changelog -- --module-name toolkit --file Toolkit.scala --skip js 
+          scala-cli changelog -- --module-name toolkit --file Toolkit.js.scala --skip jvm --skip native
+          scala-cli changelog -- --module-name toolkit-test --file ToolkitTest.scala --module-dep toolkit
       
       - name: Run test examples
         run: |
