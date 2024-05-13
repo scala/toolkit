@@ -25,6 +25,9 @@ jobs:
 
       - name: Check changelog compliance
         run: scala-cli changelog
+
+      - name: Run cross-platform tests
+        run: scala-cli test tests/CrossPlatform.test.scala
       
       - name: Compile and run examples
         run: |
