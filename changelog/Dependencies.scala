@@ -42,11 +42,12 @@ object Dependencies:
       * Format: major.minor[.patch][-suffix]
       * Lacking patch is treated as 0
       */
-    def parse(s: String): Option[Version] = 
+    def parse(s: String): Version = 
       val regex = """(\d+)\.(\d+)(\.\d+)?(-[a-zA-Z\d\.]+)?""".r
       s match
-        case regex(major, minor, patch, suffix) => Some(Version(major.toInt, minor.toInt, Option(patch).map(_.drop(1).toInt).getOrElse(0), Option(suffix).map(_.drop(1))))
-        case _ => None
+        case regex(major, minor, patch, suffix) =>
+          Version(major.toInt, minor.toInt, Option(patch).map(_.drop(1).toInt).getOrElse(0), Option(suffix).map(_.drop(1)))
+        case _ => throw new Exception(s"Could not parse version $s")
 
 
   enum VersionDiff(val order: Int) extends Ordered[VersionDiff] derives ReadWriter:
@@ -55,17 +56,13 @@ object Dependencies:
     case MajorUpdate extends VersionDiff(2)
     
     def compare(that: VersionDiff): Int = order compare that.order
-  
-
-  object VersionString:
-    def unapply(s: String): Option[Version] = Version.parse(s)
 
   case class Dep(id: String, version: Version, deps: List[Dep]) derives ReadWriter:
     override def toString: String = s"$id:$version"
     def toMdTree: String = Dep.toMdTreeRec(List((this, 0)), Set.empty, "")
 
   object Dep:
-    private val dependenciesDisallowlist = Set(
+    private val disallowList = Set(
       ("org.scala-lang", "scala-library"), 
       ("org.scala-lang", "scala3-library"), 
       ("org.scala-lang", "scala-reflect"), 
@@ -75,12 +72,12 @@ object Dependencies:
 
     private def isAllowed(dep: DependencyTree): Boolean = 
       val module = dep.dependency.module
-      dependenciesDisallowlist.forall { 
+      disallowList.forall { 
         case (org, namePrefix) => module.organization.value != org || !module.name.value.startsWith(namePrefix) 
       }
 
-    def resolve(org: String, module: String, crossVersion: String, version: Version): Dep =
-      val dep = Dependency(Module(Organization(org), ModuleName(module + "_" + crossVersion)), version.toString)
+    def resolve(org: String, module: String, binaryVersion: String, version: Version): Dep =
+      val dep = Dependency(Module(Organization(org), ModuleName(module + binaryVersion)), version.toString)
       val resolution = Resolve()
           .addDependencies(dep)
           .run()
@@ -91,10 +88,8 @@ object Dependencies:
     def makeDepTree(tree: DependencyTree): Dep =
       val dep = tree.dependency
       val depId = s"${dep.module.organization.value}:${dep.module.name.value}"
-      val versionParsed = Version.parse(dep.version)
-      versionParsed match
-        case Some(version) => Dep(dep.module.toString(), version, tree.children.filter(isAllowed).map(makeDepTree).toList)
-        case None => throw new Exception(s"Could not parse version from $depId:${dep.version}")
+      val version = Version.parse(dep.version)
+      Dep(dep.module.toString(), version, tree.children.filter(isAllowed).map(makeDepTree).toList)
       
     @tailrec
     private def toMdTreeRec(queue: List[(Dep, Int)], visited: Set[Dep], resultAcc: String): String = 

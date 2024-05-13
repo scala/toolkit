@@ -51,7 +51,7 @@ case class Changelog(moduleName: String, directChanges: Set[Diff], indirectChang
       val indirectChangesHeader = "\n## Changes to transitive dependencies"
       val indirectChangesList = indirectChanges.map(diff => s" - ${toString(diff)}").toList.sorted
       (indirectChangesHeader :: indirectChangesList).mkString("\n") + "\n"
-    val header = s"# Changelog for ${moduleName} ${Config.developmentVersion}"
+    val header = s"# Changelog for $moduleName"
     header + "\n" + directChangesSection + indirectChangesSection
 
   private def toString(diff: Diff): String = 
@@ -66,5 +66,5 @@ object Changelog:
     val parentDiff = diffs.find(_.under.isEmpty).getOrElse(throw new Exception("No parent diff found"))
     val parentId = Diff.getOldDep(parentDiff).getOrElse(throw new Exception(s"Illegal parent diff: ${parentDiff}")).id
     val (directChanges, indirectChanges) = diffs.partition(_.under.exists(_.id == parentId))
-    val illegalDiffsToVersonDiff = illegalDiffs.map({ case IllegalDiff(diff, required) => (diff, required) }).toMap
-    Changelog(moduleName, directChanges.toSet, indirectChanges.toSet - parentDiff, illegalDiffsToVersonDiff)
+    val illegalDiffsToVersionDiff = illegalDiffs.map({ case IllegalDiff(diff, required) => (diff, required) }).toMap
+    Changelog(moduleName, directChanges.toSet, indirectChanges.toSet - parentDiff, illegalDiffsToVersionDiff)
