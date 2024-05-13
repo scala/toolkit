@@ -27,10 +27,7 @@ jobs:
         uses: VirtusLab/scala-cli-setup@main
       
       - name: Test changelog compliance
-        run: |
-          scala-cli changelog -- --module-name toolkit --file Toolkit.scala --skip js 
-          scala-cli changelog -- --module-name toolkit --file Toolkit.js.scala --skip jvm --skip native
-          scala-cli changelog -- --module-name toolkit-test --file ToolkitTest.scala --module-dep toolkit
+        run: scala-cli changelog
 
       - name: Import GPG key
         id: import_gpg

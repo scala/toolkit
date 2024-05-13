@@ -63,9 +63,9 @@ object Dependencies:
 
   object Dep:
     private val disallowList = Set(
-      ("org.scala-lang", "scala-library"), 
-      ("org.scala-lang", "scala3-library"), 
-      ("org.scala-lang", "scala-reflect"), 
+      ("org.scala-lang", "scala-library"),
+      ("org.scala-lang", "scala3-library"),
+      ("org.scala-lang", "scala-reflect"),
       ("org.scala-native", ""), // all
       ("org.scala-js", "") // all
     )
@@ -78,18 +78,13 @@ object Dependencies:
 
     def resolve(org: String, module: String, binaryVersion: String, version: Version): Dep =
       val dep = Dependency(Module(Organization(org), ModuleName(module + binaryVersion)), version.toString)
-      val resolution = Resolve()
-          .addDependencies(dep)
-          .run()
-      
-      val head = DependencyTree(resolution).head
-      makeDepTree(head)
+      val resolution = Resolve().addDependencies(dep).run()
+      makeDepTree(DependencyTree(resolution).head)
 
     def makeDepTree(tree: DependencyTree): Dep =
       val dep = tree.dependency
-      val depId = s"${dep.module.organization.value}:${dep.module.name.value}"
       val version = Version.parse(dep.version)
-      Dep(dep.module.toString(), version, tree.children.filter(isAllowed).map(makeDepTree).toList)
+      Dep(dep.module.toString, version, tree.children.filter(isAllowed).map(makeDepTree).toList)
       
     @tailrec
     private def toMdTreeRec(queue: List[(Dep, Int)], visited: Set[Dep], resultAcc: String): String = 
