@@ -7,3 +7,4 @@ val jsonString = """{"name": "Peter", "pet": "Toolkitty"}"""
 val petOwner: PetOwner = read[PetOwner](jsonString)
 
 println(petOwner)
+//$ PetOwner(Peter,Toolkitty)

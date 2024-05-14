@@ -7,3 +7,4 @@ val petOwner = PetOwner("Peter", "Toolkitty")
 val json = write(petOwner)
 
 println(json)
+//$ {"name":"Peter","pet":"Toolkitty"}
