@@ -1,4 +1,5 @@
 //> using toolkit 0.2.1
+//> using scala 3.3
 
 import scala.util.Try
 import scala.Console.*
