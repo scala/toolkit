@@ -166,7 +166,7 @@ class ChangelogCheckerTest extends munit.FunSuite:
     private def generateConfigFile(moduleName: String, version: String, deps: List[String]): os.Path = 
         // scala-cli config file write
         os.temp(
-            s"""|//> using scala 2.13, 3
+            s"""|//> using scala 2.13, 3.3
                 |//> using publish.name $moduleName
                 |${deps.map(d => s"//> using dep $d").mkString("\n")}
                 |//> using publish.version $version

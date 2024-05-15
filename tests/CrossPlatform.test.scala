@@ -1,4 +1,5 @@
 //> using toolkit 0.2.1
+//> using scala 3.3
 
 import scala.util.Try
 import scala.Console.*
@@ -36,7 +37,7 @@ class CrossPlatformTests extends munit.FunSuite:
     val expectedOutput = getExpectedOutput(testFile)
     println(s"Running $testName")
     
-    val testProcess = os.proc("scala-cli", "run", "--toolkit", toolkitVersion, extraOpts, testFile).call(check = false)
+    val testProcess = os.proc("scala-cli", "run", "--scala", "3.3", "--toolkit", toolkitVersion, extraOpts, testFile).call(check = false)
     val output = testProcess.out.lines().map(_.trim)
 
     if testProcess.exitCode != 0 then
