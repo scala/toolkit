@@ -8,7 +8,10 @@ def main(args: String*) =
     val yes = args.contains("--yes")
     val config = Config.loadFromEnv
     val exceptionsPath = os.pwd / "changelog" / "exceptions.txt"
-    val exceptions = if os.exists(exceptionsPath) then os.read(exceptionsPath).split("\n").map(_.trim).toSeq else Seq.empty
+    val exceptions =
+      if os.exists(exceptionsPath) then 
+        os.read(exceptionsPath).split("\n").map(_.trim).filter(_.nonEmpty).toSeq
+      else Seq.empty
     val changelogChecker = ChangelogChecker(Config.loadFromEnv, exceptions, overwrite, yes)
     changelogChecker.check(os.pwd / "Toolkit.scala", "toolkit", Platform.Jvm)
     changelogChecker.check(os.pwd / "Toolkit.scala", "toolkit", Platform.Native)
