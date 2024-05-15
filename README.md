@@ -16,7 +16,5 @@ In the `changelog` directory you can find a list of changes in the dependencies 
 ### Generate or update changelog
 To generate or update the changelog, run the following command:
 ```shell
-scala-cli checks -- --module-name toolkit --file Toolkit.scala --skip js --overwrite
-scala-cli checks -- --module-name toolkit --file Toolkit.js.scala --skip jvm --skip native --overwrite
-scala-cli checks -- --module-name toolkit-test --file ToolkitTest.scala --overwrite --module-dep toolkit
+scala-cli changelog -- --overwrite
 ```
