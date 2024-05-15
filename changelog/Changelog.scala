@@ -14,11 +14,11 @@ def main(args: String*) =
       else Seq.empty
     val changelogChecker = ChangelogChecker(Config.loadFromEnv, exceptions, overwrite, yes)
     changelogChecker.check(os.pwd / "Toolkit.scala", "toolkit", Platform.Jvm)
-    changelogChecker.check(os.pwd / "Toolkit.scala", "toolkit", Platform.Native)
+    changelogChecker.check(os.pwd / "Toolkit.scala", "toolkit", Platform.Native, firstRelease = true)
     changelogChecker.check(os.pwd / "Toolkit.js.scala", "toolkit", Platform.Js)
     val toolkitTestFile = addToolkitDependency(os.pwd / "ToolkitTest.scala", config.organization, config.developmentVersion)
     changelogChecker.check(toolkitTestFile, "toolkit-test", Platform.Jvm)
-    changelogChecker.check(toolkitTestFile, "toolkit-test", Platform.Native)
+    changelogChecker.check(toolkitTestFile, "toolkit-test", Platform.Native, firstRelease = true)
     changelogChecker.check(toolkitTestFile, "toolkit-test", Platform.Js)
   catch
     case e: ChangelogException =>

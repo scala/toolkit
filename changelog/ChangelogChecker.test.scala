@@ -5,9 +5,9 @@ import scala.concurrent.duration.Duration
 
 class ChangelogCheckerTest extends munit.FunSuite:
     val baseDeps = List(
-        "com.softwaremill.sttp.client4::core::4.0.0-M1",
-        "com.softwaremill.sttp.client4::upickle::4.0.0-M1",
-        "org.scalameta::munit::1.0.0-M8",
+        "com.softwaremill.sttp.client4::core::4.0.0-M14",
+        "com.softwaremill.sttp.client4::upickle::4.0.0-M14",
+        "org.scalameta::munit::1.0.0-RC1",
     )
 
     override val munitTimeout = Duration(90, "s")
@@ -22,7 +22,7 @@ class ChangelogCheckerTest extends munit.FunSuite:
             Version(1,0,0),
             Version(2,0,0),
             baseDeps,
-            baseDeps :+ "com.lihaoyi::upickle::3.1.0"
+            baseDeps :+ "com.lihaoyi::upickle::3.3.0"
         )
         intercept[AlreadyExists](runChangelog(change, Platform.Native))
 
@@ -32,11 +32,11 @@ class ChangelogCheckerTest extends munit.FunSuite:
             Version(1,0,0),
             Version(1,1,0), 
             baseDeps :+ "com.lihaoyi::upickle::3.0.0",
-            baseDeps :+ "com.lihaoyi::upickle::3.1.0"
+            baseDeps :+ "com.lihaoyi::upickle::3.3.0"
         )
-        val changelog = runChangelog(change, Platform.Native, overwrite = true).get
+        val changelog = runChangelog(change, Platform.Js, overwrite = true).get
         val updatedDep = changelog.directChanges.collectFirst {
-            case change @ DepUpdated(Dep(s"com.lihaoyi:upickle$_", Version(3,0,0,_), _), Dep(s"com.lihaoyi:upickle$_", Version(3,1,0,_), _), _) => change
+            case change @ DepUpdated(Dep(s"com.lihaoyi:upickle$_", Version(3,0,0,_), _), Dep(s"com.lihaoyi:upickle$_", Version(3,3,0,_), _), _) => change
         }
         assert(updatedDep.nonEmpty)
 
@@ -83,7 +83,7 @@ class ChangelogCheckerTest extends munit.FunSuite:
             baseDeps :+ "com.lihaoyi::upickle::2.0.0",
             baseDeps :+ "com.lihaoyi::upickle::3.0.0"
         )
-        intercept[IllegalDiffs](runChangelog(change, Platform.Native))
+        intercept[IllegalDiffs](runChangelog(change, Platform.Jvm))
 
     test("Disallow minor dep change in patch update"):
         val change = LibraryChange(
@@ -111,7 +111,7 @@ class ChangelogCheckerTest extends munit.FunSuite:
             baseDeps :+ "com.lihaoyi::upickle::3.0.0-M1",
             baseDeps :+ "com.lihaoyi::upickle::3.0.0-M2"
         )
-        runChangelog(change, Platform.Native, overwrite = true)
+        runChangelog(change, Platform.Js, overwrite = true)
     
     test("Disallow major milestone change in minor milestone update"):
         val change = LibraryChange(
@@ -138,10 +138,10 @@ class ChangelogCheckerTest extends munit.FunSuite:
             "example", 
             Version(1,0,0),
             Version(2,0,0), 
-            baseDeps :+ "com.lihaoyi::upickle::3.1.0",
+            baseDeps :+ "com.lihaoyi::upickle::3.3.0",
             baseDeps :+ "com.lihaoyi::upickle::3.0.0"
         )
-        runChangelog(change, Platform.Native, overwrite = true)
+        runChangelog(change, Platform.Js, overwrite = true)
 
     case class LibraryChange(
         moduleName: String,

@@ -1,4 +1,4 @@
-//> using toolkit 0.2.1
+//> using toolkit 0.3.0
 //> using scala 3.3
 
 import scala.util.Try
@@ -9,9 +9,9 @@ class CrossPlatformTests extends munit.FunSuite:
   requireCmd("scala-cli")
   test("jvm")(publishAndRun("jvm", "1.0.0-SNAPSHOT"))
   test("js")(publishAndRun("js", "1.0.0-SNAPSHOT", "--js"))
-  test("native")(publishAndRun("native", "1.0.0-SNAPSHOT", "--native", "--native-version", "0.4.17"))
+  test("native")(publishAndRun("native", "1.0.0-SNAPSHOT", "--native", "--native-version", "0.5.1"))
 
-  override val munitTimeout = Duration(90, "s")
+  override val munitTimeout = Duration(120, "s")
 
   private def publishAndRun(platform: String, version: String, extraOpts: String*): Unit =
     val toolkitFile = if platform == "js" then os.pwd / "Toolkit.js.scala" else os.pwd / "Toolkit.scala"

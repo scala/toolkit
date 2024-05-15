@@ -1,4 +1,4 @@
-name: Test examples
+name: Tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Test examples
+    name: Tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -25,6 +25,11 @@ jobs:
 
       - name: Check changelog compliance
         run: scala-cli changelog
+
+      - name: Install libidn2-dev libcurl3-dev for sttp on Native
+        run: |
+          sudo apt-get update
+          sudo apt-get install libidn2-dev libcurl3-dev
 
       - name: Run cross-platform tests
         run: scala-cli test tests/CrossPlatform.test.scala

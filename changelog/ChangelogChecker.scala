@@ -4,12 +4,14 @@ import Dependencies.*
 import ChangelogException.*
 
 class ChangelogChecker(config: Config, versionExceptions: Seq[String], overwrite: Boolean, yes: Boolean):
-  def check(file: os.Path, moduleName: String, platform: Platform): Unit =
+  def check(file: os.Path, moduleName: String, platform: Platform, firstRelease: Boolean = false): Unit =
     println("Publishing locally to validate the dependency tree...")
     publish(file, platform)
     for languageVersion <- Seq("3", "2.13") do
       val binaryVersion = s"${platform.binarySuffix}_$languageVersion"
-      val previousSnapshot = Dep.resolve(config.organization, moduleName, binaryVersion, config.releaseVersion)
+      val previousSnapshot = 
+        if firstRelease then Dep(moduleName + binaryVersion, config.releaseVersion, List.empty)
+        else Dep.resolve(config.organization, moduleName, binaryVersion, config.releaseVersion)
       val currentSnapshot = Dep.resolve(config.organization, moduleName, binaryVersion, config.developmentVersion)
       checkTree(moduleName)(binaryVersion, previousSnapshot, currentSnapshot)
 
