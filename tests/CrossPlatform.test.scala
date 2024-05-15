@@ -11,7 +11,7 @@ class CrossPlatformTests extends munit.FunSuite:
   test("js")(publishAndRun("js", "1.0.0-SNAPSHOT", "--js"))
   test("native")(publishAndRun("native", "1.0.0-SNAPSHOT", "--native", "--native-version", "0.5.1"))
 
-  override val munitTimeout = Duration(90, "s")
+  override val munitTimeout = Duration(120, "s")
 
   private def publishAndRun(platform: String, version: String, extraOpts: String*): Unit =
     val toolkitFile = if platform == "js" then os.pwd / "Toolkit.js.scala" else os.pwd / "Toolkit.scala"
