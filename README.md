@@ -1,4 +1,5 @@
 # The Scala Toolkit
+
 The batteries-included Scala. Read about the Scala Toolkit in [scala-lang tutorials](https://docs.scala-lang.org/toolkit/introduction.html).
 
 ## Using the Scala Toolkit
