@@ -14,8 +14,6 @@ Or by including the latest Toolkit artifact in your build file: `org.scala-lang:
 ## Dependencies changelog
 In the `changelog` directory you can find a list of changes in the dependencies of the Scala Toolkit, including transitive ones.
 
-### Generate or update changelog
-To generate or update the changelog, run the following command:
-```shell
-scala-cli changelog -- --overwrite
-```
+## How to update the dependencies? How to release the toolkit?
+
+Check out the [Contributing Guide](CONTRIBUTING.md).
