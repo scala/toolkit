@@ -25,20 +25,19 @@ class ChangelogChecker(config: Config, versionExceptions: Seq[String], overwrite
     ).call(stderr = os.Pipe) // mute warnings
 
   private def checkTree(moduleName: String)(binaryVersion: String, previousSnapshot: Dep, currentSnapshot: Dep): Unit = 
-    println(s"\nChecking tree for $binaryVersion...")
+    println(s"\nChecking tree for binary version $binaryVersion...")
 
     val summary = SnapshotDiffValidator.summarize(previousSnapshot, currentSnapshot)
     if summary.illegalDiffs.nonEmpty then
-      println(s"For $binaryVersion found diffs illegal to introduce on this update type: ${summary.updateType}")
-      println(s"Illegal diffs: \n${summary.illegalDiffs.mkString(" - ", "\n - ", "\n")}")
+      println(s"Illegal diffs for ${summary.updateType}: \n${summary.illegalDiffs.mkString(" - ", "\n - ", "\n")}")
       if versionExceptions.contains(currentSnapshot.version.toString) then
-        println(currentSnapshot.version.toString + " is explicit exception, ignoring illegal diffs")
+        println("Ignoring illegal diffs because " +  currentSnapshot.version.toString + " is found in exceptions.txt")
       else throw IllegalDiffs()
 
     val diffsFound = summary.diffs.nonEmpty
 
     if diffsFound then
-      println("Found diffs in development version: \n" + summary.diffs.mkString(" - ", "\n - ", ""))
+      println("All diffs are: \n" + summary.diffs.mkString(" - ", "\n - ", ""))
     else 
       println("No diffs found")
 
@@ -55,9 +54,8 @@ class ChangelogChecker(config: Config, versionExceptions: Seq[String], overwrite
     def changelogsDiff = generatedChangelog.diff(parsedChangelog)
 
     if changelogsDiff.nonEmpty then
-      println("Found diffs in changelog: \n" + changelogsDiff.get)
+      println("Changelog file is outdated: \n" + changelogsDiff.get)
       if !overwrite then throw AlreadyExists()
-        
       else
         val input = if yes then "y" else StdIn.readLine("Overwrite symbols? (y/N)")
         if input == "y" || input == "Y" then
@@ -70,10 +68,10 @@ class ChangelogChecker(config: Config, versionExceptions: Seq[String], overwrite
           println("Overwritten")
         else throw UserRejection()
     else 
-      println("No diffs found in changelog")
+      println("Changelog file is up-to-date")
 
 object SnapshotDiffValidator:
-  def summarize(previous: Dep, current: Dep): DiffSummary = 
+  def summarize(previous: Dep, current: Dep): DiffSummary =
     val versionDiff = Version.compareVersions(previous.version, current.version)
 
     def traverseDep(oldDep: Option[Dep], newDep: Option[Dep], enteredFrom: Option[Dep] = None): List[Diff] =
