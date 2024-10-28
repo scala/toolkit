@@ -7,9 +7,5 @@ val response = quickRequest
   .body("Lorem ipsum")
   .send()
 
-val firstLines = response.body.linesIterator.take(4).mkString("\n")
-println(firstLines)
-//$ <!doctype html>
-//$ <html>
-//$ <head>
-//$ <title>Example Domain</title>
+println(response.body.linesIterator.size)
+//$ 0
