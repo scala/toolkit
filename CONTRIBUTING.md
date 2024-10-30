@@ -1,5 +1,20 @@
 # Contributing Guide
 
+## Running the tests
+
+1. Update to latest scala-cli:
+```
+$ scala-cli update
+```
+or, if installed with Coursier:
+```
+$ cs update scala-cli
+```
+2. Run the tests:
+```
+$ scala-cli test tests/CrossPlatform.test.sscala
+```
+
 ## Updating dependencies
 
 1. You can update the Toolkit dependencies in `Toolkit.scala`, `Toolkit.js.scala` and `ToolkitTest.scala`. The versions in `Toolkit.scala` and `Toolkit.js.scala` should be the same.
