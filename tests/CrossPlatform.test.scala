@@ -1,4 +1,4 @@
-//> using toolkit 0.5.0
+//> using toolkit 0.6.0
 //> using scala 3.3
 
 import scala.util.Try
