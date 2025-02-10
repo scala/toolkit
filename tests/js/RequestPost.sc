@@ -3,12 +3,13 @@
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
-import sttp.client4.quick.*
+import sttp.client4.*
 
-val request = quickRequest
+val backend = DefaultFutureBackend()
+val request = basicRequest
   .post(uri"https://example.com/")
   .body("Lorem ipsum")
 
-for response <- request.send() do
-  println(response.body.linesIterator.size)
-  //$ 0
+for response <- backend.send(request) do
+  println(response.code)
+  //$ 403
