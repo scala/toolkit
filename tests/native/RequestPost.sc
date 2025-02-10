@@ -2,10 +2,10 @@
 
 import sttp.client4.quick.*
 
-val response = quickRequest
+val response = basicRequest
   .post(uri"https://example.com/")
   .body("Lorem ipsum")
   .send()
 
-println(response.body.linesIterator.size)
-//$ 0
+println(response.code)
+//$ 403
