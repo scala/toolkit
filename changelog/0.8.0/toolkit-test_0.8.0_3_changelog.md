@@ -2,6 +2,7 @@
 
 ## Changes to direct dependencies
  - Updated `org.scala-lang:toolkit_3:0.7.0` from `0.7.0` to `0.8.0` under `org.scala-lang:toolkit-test_3:0.8.0`
+ - Updated `org.scalameta:munit_3:1.1.0` from `1.1.0` to `1.2.1` under `org.scala-lang:toolkit-test_3:0.8.0`
 
 ## Changes to transitive dependencies
  - Added `com.lihaoyi:os-zip:0.11.6` under `com.lihaoyi:os-lib_3:0.11.6`
@@ -27,6 +28,8 @@
  - Updated `com.softwaremill.sttp.shared:core_3:1.4.2` from `1.4.2` to `1.5.0` under `com.softwaremill.sttp.client4:core_3:4.0.13`
  - Updated `com.softwaremill.sttp.shared:core_3:1.4.2` from `1.4.2` to `1.5.0` under `com.softwaremill.sttp.shared:ws_3:1.5.0`
  - Updated `com.softwaremill.sttp.shared:ws_3:1.4.2` from `1.4.2` to `1.5.0` under `com.softwaremill.sttp.client4:core_3:4.0.13`
+ - Updated `org.scalameta:junit-interface:1.1.0` from `1.1.0` to `1.2.1` under `org.scalameta:munit_3:1.2.1`
+ - Updated `org.scalameta:munit-diff_3:1.1.0` from `1.1.0` to `1.2.1` under `org.scalameta:munit_3:1.2.1`
 
 ## Full dependency tree
 
@@ -57,10 +60,10 @@
        - com.softwaremill.sttp.client4:core_3:4.0.13 (already listed)
        - com.softwaremill.sttp.client4:json-common_3:4.0.13
          - com.softwaremill.sttp.client4:core_3:4.0.13 (already listed)
-   - org.scalameta:munit_3:1.1.0
+   - org.scalameta:munit_3:1.2.1
      - junit:junit:4.13.2
        - org.hamcrest:hamcrest-core:1.3.0
-     - org.scalameta:junit-interface:1.1.0
+     - org.scalameta:junit-interface:1.2.1
        - junit:junit:4.13.2 (already listed)
        - org.scala-sbt:test-interface:1.0.0
-     - org.scalameta:munit-diff_3:1.1.0
+     - org.scalameta:munit-diff_3:1.2.1

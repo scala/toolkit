@@ -2,6 +2,7 @@
 
 ## Changes to direct dependencies
  - Updated `org.scala-lang:toolkit_native0.5_3:0.7.0` from `0.7.0` to `0.8.0` under `org.scala-lang:toolkit-test_native0.5_3:0.8.0`
+ - Updated `org.scalameta:munit_native0.5_3:1.1.0` from `1.1.0` to `1.2.1` under `org.scala-lang:toolkit-test_native0.5_3:0.8.0`
 
 ## Changes to transitive dependencies
  - Updated `com.lihaoyi:os-lib_native0.5_3:0.11.3` from `0.11.3` to `0.11.6` under `org.scala-lang:toolkit_native0.5_3:0.8.0`
@@ -26,6 +27,7 @@
  - Updated `com.softwaremill.sttp.shared:core_native0.5_3:1.4.2` from `1.4.2` to `1.5.0` under `com.softwaremill.sttp.client4:core_native0.5_3:4.0.13`
  - Updated `com.softwaremill.sttp.shared:core_native0.5_3:1.4.2` from `1.4.2` to `1.5.0` under `com.softwaremill.sttp.shared:ws_native0.5_3:1.5.0`
  - Updated `com.softwaremill.sttp.shared:ws_native0.5_3:1.4.2` from `1.4.2` to `1.5.0` under `com.softwaremill.sttp.client4:core_native0.5_3:4.0.13`
+ - Updated `org.scalameta:munit-diff_native0.5_3:1.1.0` from `1.1.0` to `1.2.1` under `org.scalameta:munit_native0.5_3:1.2.1`
 
 ## Full dependency tree
 
@@ -55,5 +57,5 @@
        - com.softwaremill.sttp.client4:core_native0.5_3:4.0.13 (already listed)
        - com.softwaremill.sttp.client4:json-common_native0.5_3:4.0.13
          - com.softwaremill.sttp.client4:core_native0.5_3:4.0.13 (already listed)
-   - org.scalameta:munit_native0.5_3:1.1.0
-     - org.scalameta:munit-diff_native0.5_3:1.1.0
+   - org.scalameta:munit_native0.5_3:1.2.1
+     - org.scalameta:munit-diff_native0.5_3:1.2.1
