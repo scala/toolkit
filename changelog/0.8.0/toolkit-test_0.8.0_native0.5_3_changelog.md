@@ -4,6 +4,7 @@
  - Updated `org.scala-lang:toolkit_native0.5_3:0.7.0` from `0.7.0` to `0.8.0` under `org.scala-lang:toolkit-test_native0.5_3:0.8.0`
 
 ## Changes to transitive dependencies
+ - Updated `com.lihaoyi:os-lib_native0.5_3:0.11.3` from `0.11.3` to `0.11.6` under `org.scala-lang:toolkit_native0.5_3:0.8.0`
  - Updated `com.lihaoyi:ujson_native0.5_3:4.1.0` from `4.1.0` to `4.4.1` under `com.lihaoyi:upickle_native0.5_3:4.4.0`
  - Updated `com.lihaoyi:ujson_native0.5_3:4.1.0` from `4.1.0` to `4.4.1` under `com.lihaoyi:upickle_native0.5_3:4.4.1`
  - Updated `com.lihaoyi:upack_native0.5_3:4.1.0` from `4.1.0` to `4.4.1` under `com.lihaoyi:upickle_native0.5_3:4.4.0`
@@ -30,7 +31,7 @@
 
  - org.scala-lang:toolkit-test_native0.5_3:0.8.0
    - org.scala-lang:toolkit_native0.5_3:0.8.0
-     - com.lihaoyi:os-lib_native0.5_3:0.11.3
+     - com.lihaoyi:os-lib_native0.5_3:0.11.6
        - com.lihaoyi:geny_native0.5_3:1.1.1
      - com.lihaoyi:upickle_native0.5_3:4.4.1
        - com.lihaoyi:ujson_native0.5_3:4.4.1

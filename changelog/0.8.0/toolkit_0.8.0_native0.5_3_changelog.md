@@ -1,6 +1,7 @@
 # Changelog for toolkit
 
 ## Changes to direct dependencies
+ - Updated `com.lihaoyi:os-lib_native0.5_3:0.11.3` from `0.11.3` to `0.11.6` under `org.scala-lang:toolkit_native0.5_3:0.8.0`
  - Updated `com.lihaoyi:upickle_native0.5_3:4.1.0` from `4.1.0` to `4.4.1` under `org.scala-lang:toolkit_native0.5_3:0.8.0`
  - Updated `com.softwaremill.sttp.client4:core_native0.5_3:4.0.0-RC1` from `4.0.0-RC1` to `4.0.13` under `org.scala-lang:toolkit_native0.5_3:0.8.0`
  - Updated `com.softwaremill.sttp.client4:upickle_native0.5_3:4.0.0-RC1` from `4.0.0-RC1` to `4.0.13` under `org.scala-lang:toolkit_native0.5_3:0.8.0`
@@ -28,7 +29,7 @@
 ## Full dependency tree
 
  - org.scala-lang:toolkit_native0.5_3:0.8.0
-   - com.lihaoyi:os-lib_native0.5_3:0.11.3
+   - com.lihaoyi:os-lib_native0.5_3:0.11.6
      - com.lihaoyi:geny_native0.5_3:1.1.1
    - com.lihaoyi:upickle_native0.5_3:4.4.1
      - com.lihaoyi:ujson_native0.5_3:4.4.1
