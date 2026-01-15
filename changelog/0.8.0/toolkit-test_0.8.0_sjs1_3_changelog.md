@@ -2,6 +2,7 @@
 
 ## Changes to direct dependencies
  - Updated `org.scala-lang:toolkit_sjs1_3:0.7.0` from `0.7.0` to `0.8.0` under `org.scala-lang:toolkit-test_sjs1_3:0.8.0`
+ - Updated `org.scalameta:munit_sjs1_3:1.1.0` from `1.1.0` to `1.2.1` under `org.scala-lang:toolkit-test_sjs1_3:0.8.0`
 
 ## Changes to transitive dependencies
  - Updated `com.lihaoyi:ujson_sjs1_3:4.1.0` from `4.1.0` to `4.4.0` under `com.lihaoyi:upickle_sjs1_3:4.4.0`
@@ -27,6 +28,7 @@
  - Updated `io.github.cquiroz:scala-java-time_sjs1_3:2.5.0` from `2.5.0` to `2.6.0` under `com.softwaremill.sttp.model:core_sjs1_3:1.7.17`
  - Updated `org.portable-scala:portable-scala-reflect_sjs1_2.13:1.1.2` from `1.1.2` to `1.1.3` under `io.github.cquiroz:cldr-api_sjs1_3:4.5.0`
  - Updated `org.portable-scala:portable-scala-reflect_sjs1_2.13:1.1.2` from `1.1.2` to `1.1.3` under `io.github.cquiroz:scala-java-time_sjs1_3:2.6.0`
+ - Updated `org.scalameta:munit-diff_sjs1_3:1.1.0` from `1.1.0` to `1.2.1` under `org.scalameta:munit_sjs1_3:1.2.1`
 
 ## Full dependency tree
 
@@ -60,5 +62,5 @@
        - com.softwaremill.sttp.client4:core_sjs1_3:4.0.13 (already listed)
        - com.softwaremill.sttp.client4:json-common_sjs1_3:4.0.13
          - com.softwaremill.sttp.client4:core_sjs1_3:4.0.13 (already listed)
-   - org.scalameta:munit_sjs1_3:1.1.0
-     - org.scalameta:munit-diff_sjs1_3:1.1.0
+   - org.scalameta:munit_sjs1_3:1.2.1
+     - org.scalameta:munit-diff_sjs1_3:1.2.1
