@@ -7,6 +7,6 @@ object Config:
   def loadFromEnv: Config =
     val organization = Properties.envOrElse("TOOLKIT_ORG", "org.scala-lang")
     val outputDir = Properties.envOrNone("CHANGELOG_DIR").map(os.Path(_)).getOrElse(os.pwd / "changelog")
-    val releaseVersion = Version.parse(Properties.envOrElse("TOOLKIT_VERSION_RELEASE", "0.7.0"))
-    val developmentVersion = Version.parse(Properties.envOrElse("TOOLKIT_VERSION_DEVELOPMENT", "0.8.0"))
+    val releaseVersion = Version.parse(Properties.envOrElse("TOOLKIT_VERSION_RELEASE", "0.8.0"))
+    val developmentVersion = Version.parse(Properties.envOrElse("TOOLKIT_VERSION_DEVELOPMENT", "0.8.1"))
     Config(organization, outputDir, releaseVersion, developmentVersion)

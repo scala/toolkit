@@ -21,7 +21,7 @@ class ChangelogChecker(config: Config, versionExceptions: Seq[String], overwrite
       platform.scalaCliOptions,
       Seq("--organization", config.organization),
       Seq("--project-version", config.developmentVersion.toString),
-      Seq("--native-version", "0.5.9"),
+      Seq("--native-version", "0.5.10"),
       file
     ).call(stderr = os.Pipe) // mute warnings
 
