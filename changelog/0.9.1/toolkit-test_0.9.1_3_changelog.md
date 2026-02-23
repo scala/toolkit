@@ -1,0 +1,55 @@
+# Changelog for toolkit-test
+
+## Changes to direct dependencies
+ - Updated `org.scala-lang:toolkit_3:0.9.0` from `0.9.0` to `0.9.1` under `org.scala-lang:toolkit-test_3:0.9.1`
+
+## Changes to transitive dependencies
+ - Updated `com.lihaoyi:ujson_3:4.4.2` from `4.4.2` to `4.4.3` under `com.lihaoyi:upickle_3:4.4.3`
+ - Updated `com.lihaoyi:upack_3:4.4.2` from `4.4.2` to `4.4.3` under `com.lihaoyi:upickle_3:4.4.3`
+ - Updated `com.lihaoyi:upickle-core_3:4.4.2` from `4.4.2` to `4.4.3` under `com.lihaoyi:ujson_3:4.4.3`
+ - Updated `com.lihaoyi:upickle-core_3:4.4.2` from `4.4.2` to `4.4.3` under `com.lihaoyi:upack_3:4.4.3`
+ - Updated `com.lihaoyi:upickle-core_3:4.4.2` from `4.4.2` to `4.4.3` under `com.lihaoyi:upickle-implicits_3:4.4.3`
+ - Updated `com.lihaoyi:upickle-implicits_3:4.4.2` from `4.4.2` to `4.4.3` under `com.lihaoyi:upickle_3:4.4.3`
+ - Updated `com.lihaoyi:upickle_3:4.4.2` from `4.4.2` to `4.4.3` under `org.scala-lang:toolkit_3:0.9.1`
+ - Updated `com.softwaremill.sttp.client4:core_3:4.0.15` from `4.0.15` to `4.0.19` under `com.softwaremill.sttp.client4:json-common_3:4.0.19`
+ - Updated `com.softwaremill.sttp.client4:core_3:4.0.15` from `4.0.15` to `4.0.19` under `com.softwaremill.sttp.client4:upickle_3:4.0.19`
+ - Updated `com.softwaremill.sttp.client4:core_3:4.0.15` from `4.0.15` to `4.0.19` under `org.scala-lang:toolkit_3:0.9.1`
+ - Updated `com.softwaremill.sttp.client4:json-common_3:4.0.15` from `4.0.15` to `4.0.19` under `com.softwaremill.sttp.client4:upickle_3:4.0.19`
+ - Updated `com.softwaremill.sttp.client4:upickle_3:4.0.15` from `4.0.15` to `4.0.19` under `org.scala-lang:toolkit_3:0.9.1`
+
+## Full dependency tree
+
+ - org.scala-lang:toolkit-test_3:0.9.1
+   - org.scala-lang:toolkit_3:0.9.1
+     - com.lihaoyi:os-lib_3:0.11.8
+       - com.lihaoyi:geny_3:1.1.1
+       - com.lihaoyi:os-zip:0.11.8
+     - com.lihaoyi:upickle_3:4.4.3
+       - com.lihaoyi:ujson_3:4.4.3
+         - com.lihaoyi:upickle-core_3:4.4.3
+           - com.lihaoyi:geny_3:1.1.1 (already listed)
+       - com.lihaoyi:upack_3:4.4.3
+         - com.lihaoyi:upickle-core_3:4.4.3 (already listed)
+       - com.lihaoyi:upickle-implicits_3:4.4.3
+         - com.lihaoyi:upickle-core_3:4.4.3 (already listed)
+     - com.softwaremill.sttp.client4:core_3:4.0.19
+       - com.softwaremill.sttp.model:core_3:1.7.17
+       - com.softwaremill.sttp.shared:core_3:1.5.0
+       - com.softwaremill.sttp.shared:ws_3:1.5.0
+         - com.softwaremill.sttp.model:core_3:1.7.12
+         - com.softwaremill.sttp.shared:core_3:1.5.0 (already listed)
+     - com.softwaremill.sttp.client4:upickle_3:4.0.19
+       - com.lihaoyi:upickle_3:4.4.1
+         - com.lihaoyi:ujson_3:4.4.3 (already listed)
+         - com.lihaoyi:upack_3:4.4.3 (already listed)
+         - com.lihaoyi:upickle-implicits_3:4.4.3 (already listed)
+       - com.softwaremill.sttp.client4:core_3:4.0.19 (already listed)
+       - com.softwaremill.sttp.client4:json-common_3:4.0.19
+         - com.softwaremill.sttp.client4:core_3:4.0.19 (already listed)
+   - org.scalameta:munit_3:1.2.1
+     - junit:junit:4.13.2
+       - org.hamcrest:hamcrest-core:1.3.0
+     - org.scalameta:junit-interface:1.2.1
+       - junit:junit:4.13.2 (already listed)
+       - org.scala-sbt:test-interface:1.0.0
+     - org.scalameta:munit-diff_3:1.2.1
